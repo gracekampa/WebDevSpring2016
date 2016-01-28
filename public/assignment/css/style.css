@@ -64,12 +64,13 @@ p, h1, a {
 .nav-sidebar > li > a {
     padding-right: 20px;
     padding-left: 20px;
+    color: #B988C2;
 }
 .nav-sidebar > .active > a,
 .nav-sidebar > .active > a:hover,
 .nav-sidebar > .active > a:focus {
     color: #fff;
-    background-color: #428bca;
+    background-color: #B988C2;
 }
 
 
@@ -94,9 +95,9 @@ p, h1, a {
  * Home
  */
 
-/*.welcome-text {*/
-    /*text-align: left;*/
-/*}*/
+.welcome-text {
+    text-align: justify;
+}
 
 /*
  * Placeholder dashboard ideas
