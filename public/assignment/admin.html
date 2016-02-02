@@ -52,6 +52,76 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">Admin</h1>
 
+            <h2>Users</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><input class="form-control" type="text" name="username" placeholder="username"/></td>
+                    <td><input class="form-control" type="password" name="password" placeholder="password"/></td>
+                    <td><input class="form-control" type="text" name="role" placeholder="role1, role2"/></td>
+                    </td>
+                    <td>
+                        <a href="#" class="btn btn-primary">
+                            <scan class="glyphicon glyphicon-plus"></scan>
+                        </a>
+                        <a href="#" class="btn btn-success">
+                            <scan class="glyphicon glyphicon-ok"></scan>
+                        </a>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>alice</td>
+                    <td> </td>
+                    <td>student</td>
+                    <td>
+                        <a href="#" class="btn btn-danger">
+                            <scan class="glyphicon glyphicon-remove"></scan>
+                        </a>
+                        <a href="#" class="btn btn-warning">
+                            <scan class="glyphicon glyphicon-pencil"></scan>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>bob</td>
+                    <td> </td>
+                    <td>faculty | admin</td>
+                    <td>
+                        <a href="#" class="btn btn-danger">
+                            <scan class="glyphicon glyphicon-remove"></scan>
+                        </a>
+                        <a href="#" class="btn btn-warning">
+                            <scan class="glyphicon glyphicon-pencil"></scan>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>charlie</td>
+                    <td> </td>
+                    <td> </td>
+                    <td>
+                        <a href="#" class="btn btn-danger">
+                            <scan class="glyphicon glyphicon-remove"></scan>
+                        </a>
+                        <a href="#" class="btn btn-warning">
+                            <scan class="glyphicon glyphicon-pencil"></scan>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+            <!-- can get rid of maybe -->
+
             <form class="form-horizontal">
                 <div class="form-group">
                     <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
