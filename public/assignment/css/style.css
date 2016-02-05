@@ -100,6 +100,64 @@ p, h1, a {
 }
 
 /*
+ * Register
+ */
+button > a, a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/*
+ * Forms and Fields
+ */
+
+.glyphicon:hover {
+    color: #B988C2;
+}
+
+td > a, td > a:hover {
+    color: #303030;
+    text-decoration: none;
+}
+
+td > a:hover {
+    color: #B988C2;
+}
+
+
+
+/*
+ * Forms and Fields
+ */
+th {
+    background-color: #ddd;
+}
+
+td {
+    border: 1px solid #ddd;
+}
+
+.fields-label {
+    display: block;
+}
+
+.form-control {
+    width: 70%;
+}
+
+.fields-form {
+    display: inline;
+}
+
+form {
+    padding: 10px;
+}
+
+td > a {
+    color: black;
+}
+
+/*
  * Placeholder dashboard ideas
  */
 

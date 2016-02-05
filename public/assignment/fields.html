@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Form Fields</title>
 
     <!-- Latest compiled and minified CSS -->
@@ -58,67 +59,154 @@
                 <li role="presentation" class="active"><a href="fields.html">Fields</a></li>
             </ul>
 
-            <table class="table table-striped">
-                <tbody>
-                <tr>
-                    <td>
-                        <h5>First Name:</h5>
-                        <input class="form-control" type="text" name="firstName" placeholder="name"/>
-                    </td>
-                    <td>
-                        <h5>&nbsp;</h5>
-                        <a href="#" class="btn btn-warning">
-                            <scan class="glyphicon glyphicon-pencil"></scan>
-                        </a>
-                        <a href="#" class="btn btn-primary">
-                            <scan class="glyphicon glyphicon-plus"></scan>
-                        </a>
-                        <a href="#" class="btn btn-danger">
-                            <scan class="glyphicon glyphicon-remove"></scan>
-                        </a>
-                        <a href="#" class="btn btn-success">
-                            <scan class="glyphicon glyphicon-menu-hamburger"></scan>
-                        </a>
-                    </td>
-                </tr>
+            <form>
+                <div class="form-group">
+                    <label for="firstName" class="fields-label">First Name:</label>
+                    <div class="fields-form col-xs-10">
+                        <input type="text" class="form-control fields-form" id="firstName" placeholder="First Name">
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                </div>
+            </form>
 
-                <tr>
-                    <td>
-                        <h5>Last Name:</h5>
-                        <input class="form-control" type="text" name="lastName" placeholder="name"/>
-                    </td>
-                    <td>
-                        <h5>&nbsp;</h5>
-                        <a href="#" class="btn btn-warning">
-                            <scan class="glyphicon glyphicon-pencil"></scan>
-                        </a>
-                        <a href="#" class="btn btn-primary">
-                            <scan class="glyphicon glyphicon-plus"></scan>
-                        </a>
-                        <a href="#" class="btn btn-danger">
-                            <scan class="glyphicon glyphicon-remove"></scan>
-                        </a>
-                        <a href="#" class="btn btn-success">
-                            <scan class="glyphicon glyphicon-menu-hamburger"></scan>
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <form>
+                <div class="form-group">
+                    <label for="lastName" class="fields-label">Last Name:</label>
+                    <div class="col-xs-10 fields-form">
+                        <input type="text" class="form-control fields-form" id="lastName" placeholder="Last Name">
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                </div>
+            </form>
 
-        </div>
+            <form>
+                <div class="form-group">
+                    <label for="dateOfBirth" class="fields-label">Date of Birth:</label>
+                    <div class="fields-form col-xs-10">
+                        <input type="date" class="form-control fields-form" id="dateOfBirth">
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                </div>
+            </form>
+
+            <form>
+                <div class="form-group">
+                    <label for="gender" class="fields-label">Gender:</label>
+                    <div class="col-xs-10 fields-form">
+                        <select id="gender" class="form-control fields-form">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                </div>
+            </form>
+
+            <form>
+                <div class="form-group">
+                    <label class="fields-label">Role:</label>
+                    <div class="col-xs-10 fields-form">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                Admin
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                Student
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="">
+                                User
+                            </label>
+                        </div>
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                </div>
+            </form>
+
+            <br><br><br>
+            <form>
+                <div class="form-group">
+                    <label class="fields-label">License Agreement:</label>
+                    <div class="col-xs-10 fields-form">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="licenseAgreement" id="licenseAgreement1" value="yes" checked>
+                                Yes
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="licenseAgreement" id="licenseAgreement2" value="no" checked>
+                                No
+                            </label>
+                        </div>
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        <span class="glyphicon glyphicon-plus"></span>
+                        <span class="glyphicon glyphicon-remove"></span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+                </div>
+            </form>
+
+
+            <br><br>
+            <form>
+                <div class="form-group">
+                    <label for="newField" class="fields-label">Add New Field:</label>
+                    <div class="fields-form col-xs-10">
+                        <select id="newField" class="form-control fields-form">
+                            <option>Single Line Text</option>
+                            <option>Date</option>
+                            <option>Dropdown</option>
+                            <option>Checkboxes</option>
+                        </select>
+                    </div>
+                    <div class="fields-form">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </div>
+                </div>
+            </form>
+
     </div>
+</div>
 </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="../../dist/js/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="../../assets/js/vendor/holder.min.js"></script>
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
 </html>
