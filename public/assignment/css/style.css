@@ -157,6 +157,16 @@ td > a {
     color: black;
 }
 
+.nav > li > a, .nav > li > a:hover {
+    color: #303030;
+    text-decoration: none;
+}
+
+.nav > li > a:hover {
+    color: #B988C2;
+    text-decoration: none;
+}
+
 /*
  * Placeholder dashboard ideas
  */
