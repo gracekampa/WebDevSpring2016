@@ -1,0 +1,119 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,100);
+
+
+h1 {
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    font-size: 100px;
+    padding-top: 40px;
+}
+
+.sub-title {
+    font-family: 'Raleway', sans-serif;
+    display: block;
+    font-size: 40px;
+    font-weight: 100;
+    color: #CFD1D2;
+}
+
+.title, .sub-title {
+    text-align: center;
+}
+
+.navigation {
+    background-color: whitesmoke;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
+
+.navigation:hover {
+    height: 120px;
+    background-color: #B988C2;
+}
+
+.navigation:hover a {
+    font-weight: bold;
+    color: white;
+}
+
+.navigation > a:hover {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+}
+
+.no-padding-right {
+    padding-right: 0;
+}
+
+.no-padding-left {
+    padding-left: 0;
+}
+
+.home {
+    background-color: #40464C;
+}
+
+.home > a {
+   color: #CFD1D2;
+}
+
+.about-me {
+    background-color: #707479;
+}
+
+.about-me > a {
+    color: #9FA3A5;
+}
+
+.assignments {
+    background-color: #9FA3A5;
+}
+
+.assignments > a {
+    color: #707479;
+}
+
+.project {
+    background-color: #CFD1D2;
+}
+
+.project > a {
+    color: #40464C;
+}
+
+.main-content {
+    background-color: #10181f;
+    height: 380px;
+}
+
+.box-text {
+    text-align: center;
+    line-height: 100px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.project-link:hover {
+    text-decoration: none;
+    color: #B988C2;
+}
+
+.project-link:active {
+    text-decoration: none;
+    color: white;
+}
+
+@media screen and (max-width: 767px) {
+
+    .no-padding-left {
+        padding-left: 15px;
+    }
+
+    .no-padding-right {
+        padding-right: 15px;
+    }
+}
