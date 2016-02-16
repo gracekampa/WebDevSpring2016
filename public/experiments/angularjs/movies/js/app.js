@@ -50,11 +50,13 @@
         function updateMovie(movie) {
             // we're making a copy of the movie so that when we type, it doesn't change what is on the screen until we say ok
             // we update the one of the movie index that we selected
-            $scope.movies[selectedMovieIndex] = {
-                id: movie.id,
-                title: movie.title,
-                director: movie.director
-            };
+            if(selectedMovieIndex >= 0) {
+                $scope.movies[selectedMovieIndex] = {
+                    id: movie.id,
+                    title: movie.title,
+                    director: movie.director
+                }
+            }
         }
     }
 })();
