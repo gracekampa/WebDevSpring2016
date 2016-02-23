@@ -1,7 +1,12 @@
 /**
  * Created by OWNER on 2/16/2016.
  */
-(function () {
+//(function () {
+//    angular
+//        .module("MovieApp");
+//})();
+
+(function(){
     angular
-        .module("MovieApp");
+        .module("MovieApp", ["ngRoute"]);
 })();

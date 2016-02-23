@@ -1,6 +1,37 @@
-<h2>Search</h2>
+<!--<h2>Search</h2>-->
 
-<input class="form-control"/>
+<!--<input class="form-control"/>-->
+<!--<button ng-click="search(title)" class="btn btn-primary btn-block">-->
+    <!--Search Movie-->
+<!--</button>-->
+
+<!--<div class="table-responsive">-->
+    <!--<table class="table table-striped">-->
+        <!--<thead>-->
+            <!--<tr>-->
+                <!--<th>Poster</th>-->
+                <!--<th>Title</th>-->
+                <!--<th>IMDB</th>-->
+            <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--//object has a Search array in it-->
+            <!--<tr ng-repeat="movie in data.Search">-->
+                <!--<td><img ng-src="{{movie.Poster}}"></td>-->
+                <!--<td>-->
+                    <!--<a href="#/details/{{movie.imdbID}}">-->
+                    <!--{{movie.Title}}-->
+                    <!--</a>-->
+                <!--</td>-->
+                <!--<td>{{movie.imdbID}}</td>-->
+            <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
+<!--</div>-->
+
+<h1>Search</h1>
+
+<input ng-model="title" class="form-control"/>
 <button ng-click="search(title)" class="btn btn-primary btn-block">
     Search Movie
 </button>
@@ -8,23 +39,22 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <thead>
-            <tr>
-                <th>Poster</th>
-                <th>Title</th>
-                <th>IMDB</th>
-            </tr>
+        <tr>
+            <th>Poster</th>
+            <th>Title</th>
+            <th>ImdbID</th>
+        </tr>
         </thead>
         <tbody>
-        //object has a Search array in it
-            <tr ng-repeat="movie in data.Search">
-                <td><img ng-src="{{movie.Poster}}"></td>
-                <td>
-                    <a href="#/details/{{movie.imdbID}}">
+        <tr ng-repeat="movie in data.Search">
+            <td><img ng-src="{{movie.Poster}}" height="100px"/></td>
+            <td>
+                <a href="#/details/{{movie.imdbID}}">
                     {{movie.Title}}
-                    </a>
-                </td>
-                <td>{{movie.imdbID}}</td>
-            </tr>
+                </a>
+            </td>
+            <td>{{movie.imdbID}}</td>
+        </tr>
         </tbody>
     </table>
 </div>

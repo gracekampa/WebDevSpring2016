@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Login</title>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
@@ -15,7 +15,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -27,14 +27,14 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="home.html"><b>FORM MAKER</b></a>
+            <a class="navbar-brand" href="../home/home.view.html"><b>FORM MAKER</b></a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="register.html">register</a></li>
-                <li><a href="login.html">login</a></li>
+                <li><a href="register.view.html">register</a></li>
+                <li class="active"><a href="login.view.html">login</a></li>
                 <li><a href="#">username</a></li>
-                <li><a href="home.html">logout</a></li>
+                <li><a href="../home/home.view.html">logout</a></li>
             </ul>
         </div>
     </div>
@@ -44,20 +44,34 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar">
-                <li class="active"><a href="home.html">home <span class="sr-only">(current)</span></a></li>
-                <li><a href="profile.html">profile</a></li>
-                <li><a href="admin.html">admin</a></li>
-                <li><a href="forms.html">forms</a></li>
+                <li><a href="../home/home.view.html">home</a></li>
+                <li><a href="profile.view.html">profile</a></li>
+                <li><a href="../admin/admin.view.html">admin</a></li>
+                <li><a href="../forms/forms.view.html">forms</a></li>
             </ul>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Welcome!</h1>
+            <h1 class="page-header">Login</h1>
 
-            <div class="row placeholders">
-                <div class="col-sm-6">
-                    <p class="welcome-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla quam velit, vulputate eu pharetra nec, mattis ac neque. Duis vulputate commodo lectus, ac blandit elit tincidunt id. Sed rhoncus, tortor sed eleifend tristique, tortor mauris molestie elit, et lacinia ipsum quam nec dui. Quisque nec mauris sit amet elit iaculis pretium sit amet quis magna. Aenean velit odio, elementum in tempus ut, vehicula eu diam. Pellentesque rhoncus aliquam mattis. Ut vulputate eros sed felis sodales nec vulputate justo hendrerit. Vivamus varius pretium ligula, a aliquam odio euismod sit amet. Quisque laoreet sem sit amet orci ullamcorper at ultricies metus viverra. Pellentesque arcu mauris, malesuada quis ornare accumsan, blandit sed diam.</p>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="username" class="col-sm-2 control-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="username" placeholder="Username">
+                    </div>
                 </div>
-            </div>
+                <div class="form-group">
+                    <label for="password" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-success"><a href="profile.view.html">LOGIN</a></button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>

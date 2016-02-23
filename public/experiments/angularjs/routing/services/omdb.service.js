@@ -6,11 +6,11 @@
         .module("MovieApp")
         .factory("OmdbService", omdbService);
 
-    function omdbService() {
+    function omdbService($http) {
 
         var api = {
             findMoviesByTitle: findMoviesByTitle,
-            findMoviesByImdbId: findMoviesByImdbId
+            findMovieByImdbId: findMovieByImdbId
         };
 
         return api;
@@ -20,11 +20,9 @@
                 .success(callback);
         }
 
-        function findMoviesByImdbId(imbdId) {
-            $location.url("/search/"+title);
-            console.log(title);
-            $http.get("http://www.omdbapi.com/?s=" + title)
-                .success(render);
+        function findMovieByImdbId(imdbId, callback) {
+            $http.get("http://www.omdbapi.com/?i="+imdbId)
+                .success(callback);
         }
     }
-})
+})();

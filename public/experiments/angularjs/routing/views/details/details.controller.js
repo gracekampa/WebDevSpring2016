@@ -1,7 +1,6 @@
 /**
  * Created by OWNER on 2/18/2016.
  */
-
 (function(){
     angular
         .module("MovieApp")
@@ -10,13 +9,10 @@
     function detailsController($scope, $routeParams, OmdbService) {
         $scope.imdbID = $routeParams.imdbID;
 
-        OmdbService.findMoviesByImdbId($scope.imdbID, render);
-
-        //$http.get("" + $scope.imdbID)
-        //    .success(render);
+        OmdbService.findMovieByImdbId($scope.imdbID, render)
 
         function render(response) {
-
+            $scope.movie = response;
         }
     }
 })();
