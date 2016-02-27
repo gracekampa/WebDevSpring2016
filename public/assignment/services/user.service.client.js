@@ -1,13 +1,15 @@
 /**
  * Created by OWNER on 2/23/2016.
  */
+
 (function() {
     angular
         .module("FormBuilderApp")
         .factory("UserService", UserService);
 
     function UserService($rootScope) {
-        var model = {
+
+        var services = {
             users: [
                 {        "_id":123, "firstName":"Alice",            "lastName":"Wonderland",
                     "username":"alice",  "password":"alice",   "roles": ["student"]                },
@@ -20,14 +22,67 @@
                 {        "_id":567, "firstName":"Edward",           "lastName":"Norton",
                     "username":"ed",     "password":"ed",      "roles": ["student"]                }
             ],
-            createUser: createUser,
+
             findUserByUsername: findUserByUsername,
-            findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
             setCurrentUser: setCurrentUser,
-            getCurrentUser: getCurrentUser
+            getCurrentUser: getCurrentUser,
+
+            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findAllUsers: findAllUsers,
+            createUser: createUser
+
         };
-        return model;
+        return services;
+
+        function findUserByUsernameAndPassword(username, password, callback) {
+            for (var u in services.users) {
+                if (services.users[u].username === username &&
+                    services.users[u].password === password) {
+                    callback(services.users[u]);
+                }
+            }
+            return null;
+        }
+
+        function findAllUsers(callback) {
+            callback(services.users);
+        }
+
+        function createUser(user, callback) {
+            var newUser = {
+                _id: "id:" + (new Date()).getTime(),
+                username: user.username,
+                password: user.password
+            };
+            services.users.push(newUser);
+            callback(newUser);
+            return newUser;
+        }
+
+        function deleteUserById(userId, callback) {
+            for (var u in services.users) {
+                if (services.users[u]._id === userId) {
+                    services.users.splice(u, 1);
+
+                    callback(services.users);
+                }
+            }
+            return null;
+        }
+
+        function updateUser(userId, user, callback) {
+            for (var u in services.users) {
+                if (services.users[u]._id == userId) {
+                    services.users[u].firstName = user.firstName;
+                    services.users[u].lastName = user.lastName;
+                    services.users[u].password = user.password;
+
+                    callback(services.users[u]);
+                }
+            }
+            return services.users[u];
+        }
 
         function setCurrentUser (user) {
             $rootScope.currentUser = user;
@@ -37,44 +92,13 @@
             return $rootScope.currentUser;
         }
 
-        function createUser (user) {
-            var newUser = {
-                username: user.username,
-                password: user.password
-            };
-            model.users.push(newUser);
-            return newUser;
-        }
-
         function findUserByUsername (username) {
-            for (var u in model.users) {
-                if (model.users[u].username === username) {
-                    return model.users[u];
+            for (var u in services.users) {
+                if (services.users[u].username === username) {
+                    return services.users[u];
                 }
             }
             return null;
-        }
-
-        function findUserByCredentials(credentials) {
-            for (var u in model.users) {
-                if (model.users[u].username === credentials.username &&
-                    model.users[u].password === credentials.password) {
-                    return model.users[u];
-                }
-            }
-            return null;
-        }
-
-        function updateUser (currentUser) {
-            var user = model.findUserByUsername (currentUser.username);
-            if (user != null) {
-                user.firstName = currentUser.firstName;
-                user.lastName = currentUser.lastName;
-                user.password = currentUser.password;
-                return user;
-            } else {
-                return null;
-            }
         }
     }
 })();

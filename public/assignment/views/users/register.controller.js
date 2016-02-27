@@ -28,14 +28,21 @@
                 $scope.message = "Passwords must match";
                 return;
             }
-            var user = UserService.findUserByUsername(user.username);
-            if (user != null) {
+            var newUser = UserService.findUserByUsername(user.username);
+            if (newUser != null) {
                 $scope.message = "User already exists";
                 return;
             }
-            var newUser = UserService.createUser($scope.user);
-            UserService.setCurrentUser(newUser);
-            $location.url("/profile");
+            UserService.createUser(user,
+            function(user) {
+                if (user) {
+                    UserService.setCurrentUser(user);
+                    $location.url("/profile");
+                }
+            });
+            //$rootScope.currentUser = newUser;
+            ////UserService.setCurrentUser(newUser);
+            //$location.url("/profile");
         }
     }
 })();

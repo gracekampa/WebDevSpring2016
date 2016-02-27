@@ -4,33 +4,41 @@
 (function(){
     angular
         .module("FormBuilderApp")
-        .controller("ProfileController", profileController);
+        .controller("ProfileController", ProfileController);
 
-    function profileController($scope, UserService, $location) {
+    function ProfileController($scope, UserService, $location, $rootScope) {
 
         $scope.error = null;
         $scope.message = null;
 
-        $scope.currentUser = UserService.getCurrentUser();
-        if (!$scope.currentUser) {
+        $rootScope.currentUser = UserService.getCurrentUser();
+        if (!$rootScope.currentUser) {
             $location.url("/home");
         }
 
-        $scope.updateUser = updateUser;
+        $scope.update = update;
 
-        function updateUser (user) {
+        function update(user) {
             // same validation as register
             $scope.error = null;
             $scope.message = null;
 
-            $scope.currentUser = UserService.updateUser(user);
+            $rootScope.currentUser = UserService.updateUser(user._id, user,
+            function(user) {
+                if (user) {
+                    $scope.message = "User updated successfully";
+                    UserService.setCurrentUser($rootScope.currentUser);
+                } else {
+                    $scope.message = "Unable to update the user";
+                }
+            });
 
-            if (user) {
-                $scope.message = "User updated successfully";
-                UserService.setCurrentUser($scope.currentUser);
-            } else {
-                $scope.message = "Unable to update the user";
-            }
+            //if (user) {
+            //    $scope.message = "User updated successfully";
+            //    UserService.setCurrentUser($rootScope.currentUser);
+            //} else {
+            //    $scope.message = "Unable to update the user";
+            //}
         }
     }
 })();
