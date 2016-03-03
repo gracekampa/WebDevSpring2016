@@ -1,0 +1,15 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h2 class="page-header">{{movie.Title}}</h2>
+
+    <img ng-src="{{movie.Poster}}" class="pull-left thumb-poster"/>
+
+    <p>{{movie.Plot}}</p>
+
+    <h3>Actors</h3>
+
+    <ul>
+        <li ng-repeat="name in movie.Actors.split(',')">
+            {{name}}
+        </li>
+    </ul>
+</div>
