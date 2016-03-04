@@ -18,6 +18,8 @@
             $location.url("/search/" + title);
             console.log(title);
             OmdbService.findMoviesByTitle(title, render);
+            //$http.get("http://www.omdbapi.com/?s=" + title)
+            //    .success(render);
         }
 
         function render(response) {

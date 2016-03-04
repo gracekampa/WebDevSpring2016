@@ -32,6 +32,13 @@
                     $scope.message = "Unable to update the user";
                 }
             });
+
+            //if (user) {
+            //    $scope.message = "User updated successfully";
+            //    UserService.setCurrentUser($rootScope.currentUser);
+            //} else {
+            //    $scope.message = "Unable to update the user";
+            //}
         }
     }
 })();
