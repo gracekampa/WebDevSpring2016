@@ -19,6 +19,10 @@
     <script src="views/users/login.controller.js"></script>
     <script src="views/users/profile.controller.js"></script>
     <script src="views/users/register.controller.js"></script>
+    <script src="views/admin/adminmovies.controller.js"></script>
+    <script src="views/admin/adminusers.controller.js"></script>
+    <script src="services/adminmovie.service.client.js"></script>
+    <script src="services/adminuser.service.client.js"
     <script src="services/user.service.client.js"></script>
     <script src="services/omdb.service.client.js"></script>
     <title></title>
@@ -31,9 +35,9 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-2">
-            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
-        </div>
+        <!--<div class="col-sm-2">-->
+            <!--<div ng-include="'views/sidebar/sidebar.view.html'"></div>-->
+        <!--</div>-->
         <div class="col-sm-10" ng-view>
         </div>
     </div>

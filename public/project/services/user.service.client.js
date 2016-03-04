@@ -30,7 +30,8 @@
 
             findUserByUsernameAndPassword: findUserByUsernameAndPassword,
             findAllUsers: findAllUsers,
-            createUser: createUser
+            createUser: createUser,
+            getAllUsers: getAllUsers
 
         };
         return services;
@@ -47,6 +48,11 @@
 
         function findAllUsers(callback) {
             callback(services.users);
+            return services.users;
+        }
+
+        function getAllUsers() {
+            return services.users;
         }
 
         function createUser(user, callback) {

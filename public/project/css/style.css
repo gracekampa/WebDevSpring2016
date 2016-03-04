@@ -46,6 +46,21 @@ p, h1, a {
     margin: 10px 0px 40px 0px;
 }
 
+.review-button {
+    height: 40px;
+    width: 40%;
+    color: white;
+    border-radius: 0;
+    background-color: #FF1C19;
+    border-bottom: solid 5px #7C0906;
+    margin: 20px 20px 10px 20px;
+}
+
+.review-star {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
 .button-movie:hover {
     background-color: #7C0906;
     border-bottom: solid 5px #FF1C19;
@@ -56,6 +71,13 @@ p, h1, a {
  * Top navigation
  * Hide default border to remove 1px line.
  */
+.nav > .active > a,
+.nav .active > a:hover,
+.nav > .active > a:focus {
+    color: #fff;
+    background-color: #FF1C19;
+}
+
 .navigation {
     background-color: rgba(255,255,255,0.8);
     z-index: 1;
@@ -227,5 +249,9 @@ td > a {
 
 .thumb-poster {
     height: 100px;
-    margin: 20px;
+}
+
+.details-poster {
+    height: 200px;
+    margin-right: 40px;
 }

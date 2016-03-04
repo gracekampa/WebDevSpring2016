@@ -8,10 +8,17 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="#/home"><b>Cinema</b></a>
+            <!--<a ng-show="currentUser"-->
+                <!--ng-class="{'active' : $location.url().indexOf('username') != -1}" href="#/profile">{{currentUser.username}}</a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
+                <li ng-class="{'active' : $location.url().indexOf('home') != -1}"><a href="#/home">home</a></li>
                 <li ng-class="{'active' : $location.url().indexOf('search') != -1}"><a href="#/search">search</a></li>
+                <li ng-show="currentUser"
+                    ng-class="{'active' : $location.url().indexOf('profile') != -1}"><a href="#/profile">profile</a></li>
+                <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0"
+                    ng-class="{'active' : $location.url().indexOf('admin') != -1}"><a href="#/admin">admin</a></li>
                 <li ng-hide="currentUser"
                     ng-class="{'active' : $location.url().indexOf('register') != -1}"><a href="#/register">register</a></li>
                 <li ng-hide="currentUser"

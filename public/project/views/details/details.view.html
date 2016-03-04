@@ -1,7 +1,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-    <h2 class="page-header">{{movie.Title}}</h2>
+    <h2 class="page-header">{{movie.Title}} ({{movie.Year}}) by {{movie.Director}}</h2>
 
-    <img ng-src="{{movie.Poster}}" class="pull-left thumb-poster"/>
+    <img ng-src="{{movie.Poster}}" class="pull-left details-poster"/>
 
     <p>{{movie.Plot}}</p>
 
@@ -12,4 +12,15 @@
             {{name}}
         </li>
     </ul>
+
+    <h2 class="page-header">Reviews</h2>
+    <input ng-model="title" class="form-control" placeholder="Write your review"/>
+    <span class="glyphicon glyphicon-star-empty review-star"></span>
+    <span class="glyphicon glyphicon-star-empty review-star"></span>
+    <span class="glyphicon glyphicon-star-empty review-star"></span>
+    <span class="glyphicon glyphicon-star-empty review-star"></span>
+    <span class="glyphicon glyphicon-star-empty review-star"></span>
+    <button ng-click="addReview(movie)" class="btn review-button">
+        SUBMIT
+    </button>
 </div>

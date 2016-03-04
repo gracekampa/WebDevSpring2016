@@ -40,9 +40,6 @@
                     $location.url("/profile");
                 }
             });
-            //$rootScope.currentUser = newUser;
-            ////UserService.setCurrentUser(newUser);
-            //$location.url("/profile");
         }
     }
 })();

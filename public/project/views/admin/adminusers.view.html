@@ -1,0 +1,49 @@
+<div ng-controller="AdminUsersController" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Users</h1>
+
+            <ul class="nav nav-tabs">
+                <li role="presentation"><a href="#/adminmovies">Movies</a></li>
+                <li role="presentation" class="active"><a href="adminusers.view.html">Users</a></li>
+            </ul>
+
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th><span class="glyphicon glyphicon-triangle-bottom"></span> Username</th>
+                    <th><span class="glyphicon glyphicon-triangle-bottom"></span> Password</th>
+                    <th><span class="glyphicon glyphicon-triangle-bottom"></span> Action</th>
+                </tr>
+                <tr>
+                    <td><input ng-model="user.username" class="form-control" type="text" name="userName" placeholder="username"/></td>
+                    <td><input ng-model="user.password" class="form-control" type="text" name="userPassword" placeholder="password"/></td>
+                    <td>
+                        <a ng-click="addUser(user)">
+                            <scan class="glyphicon glyphicon-plus"></scan>
+                        </a>
+                        <a ng-click="updateUser(user)">
+                            <scan class="glyphicon glyphicon-ok"></scan>
+                        </a>
+                    </td>
+                </tr>
+
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in users">
+                    <td><a href="">{{user.username}}</a></td>
+                    <td><a href="">{{user.password}}</a></td>
+                    <td>
+                        <a ng-click="deleteUser($index)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                        <a ng-click="selectUser($index)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

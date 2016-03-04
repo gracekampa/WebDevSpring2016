@@ -20,8 +20,16 @@
                 controller: "ProfileController"
             })
             .when("/admin", {
-                templateUrl: "views/admin/admin.view.html",
-                controller: "AdminController"
+                templateUrl: "views/admin/adminmovies.view.html",
+                controller: "AdminMoviesController"
+            })
+            .when("/adminmovies", {
+                templateUrl: "views/admin/adminmovies.view.html",
+                controller: "AdminMoviesController"
+            })
+            .when("/adminusers", {
+                templateUrl: "views/admin/adminusers.view.html",
+                controller: "AdminUsersController"
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
