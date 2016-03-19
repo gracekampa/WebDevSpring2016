@@ -1,152 +1,216 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Fields</h1>
+            <h1 class="page-header">{{model.form.title}}</h1>
 
             <ul class="nav nav-tabs">
                 <li role="presentation"><a href="#/forms">Forms</a></li>
                 <li role="presentation" class="active"><a href="fields.view.html">Fields</a></li>
             </ul>
 
-            <form>
-                <div class="form-group">
-                    <label for="firstName" class="fields-label">First Name:</label>
-                    <div class="fields-form col-xs-10">
-                        <input type="text" class="form-control fields-form" id="firstName" placeholder="First Name">
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
-                </div>
-            </form>
+            <div ng-repeat="field in model.fields" class="row">
+                <div class="col-xs-8">
+                    <form>
+                        <div class="form-group">
+                            <label>{{field.label}}</label>
 
-            <form>
-                <div class="form-group">
-                    <label for="lastName" class="fields-label">Last Name:</label>
-                    <div class="col-xs-10 fields-form">
-                        <input type="text" class="form-control fields-form" id="lastName" placeholder="Last Name">
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
-                </div>
-            </form>
-
-            <form>
-                <div class="form-group">
-                    <label for="dateOfBirth" class="fields-label">Date of Birth:</label>
-                    <div class="fields-form col-xs-10">
-                        <input type="date" class="form-control fields-form" id="dateOfBirth">
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
-                </div>
-            </form>
-
-            <form>
-                <div class="form-group">
-                    <label for="gender" class="fields-label">Gender:</label>
-                    <div class="col-xs-10 fields-form">
-                        <select id="gender" class="form-control fields-form">
-                            <option>Male</option>
-                            <option>Female</option>
-                        </select>
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
-                </div>
-            </form>
-
-            <form>
-                <div class="form-group">
-                    <label class="fields-label">Role:</label>
-                    <div class="col-xs-10 fields-form">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                Admin
-                            </label>
+                            <div ng-switch on="field.fieldType">
+                                <input ng-switch-when="TEXT" type="text" placeholder="field.placeholder">
+                                <textarea ng-switch-when="TEXTAREA" class="form-control" rows="3"></textarea>
+                                <input ng-switch-when="DATE" type="date">
+                                <select ng-switch-when="OPTIONS">
+                                    <option ng-repeat="option in field.options">{{option}}</option>
+                                </select>
+                                <div class="checkbox" ng-switch-when="CHECKBOXES">
+                                    <label ng-repeat="option in field.options">
+                                        <input type="checkbox" value="">
+                                        {{option}}
+                                    </label>
+                                </div>
+                                <div class="radio" ng-switch-when="RADIO">
+                                    <label ng-repeat="option in field.options">
+                                        <input type="radio">
+                                        {{option}}
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                Student
-                            </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="">
-                                User
-                            </label>
-                        </div>
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-xs-4">
+                    <span href="#" class="glyphicon glyphicon-pencil"></span>
+                    <span href="#" class="glyphicon glyphicon-plus"></span>
+                    <span href="#" ng-click="deleteField(field)" class="glyphicon glyphicon-remove"></span>
+                    <span href="#" class="glyphicon glyphicon-menu-hamburger"></span>
+                </div>
+            </div>
 
-            <br><br><br>
-            <form>
-                <div class="form-group">
-                    <label class="fields-label">License Agreement:</label>
-                    <div class="col-xs-10 fields-form">
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="licenseAgreement" id="licenseAgreement1" value="yes" checked>
-                                Yes
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="licenseAgreement" id="licenseAgreement2" value="no" checked>
-                                No
-                            </label>
-                        </div>
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-pencil"></span>
-                        <span class="glyphicon glyphicon-plus"></span>
-                        <span class="glyphicon glyphicon-remove"></span>
-                        <span class="glyphicon glyphicon-menu-hamburger"></span>
-                    </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <hr>
                 </div>
-            </form>
+            </div>
 
-            <br><br>
-            <form>
-                <div class="form-group">
-                    <label for="newField" class="fields-label">Add New Field:</label>
-                    <div class="fields-form col-xs-10">
-                        <select id="newField" class="form-control fields-form">
-                            <option>Single Line Text</option>
-                            <option>Date</option>
-                            <option>Dropdown</option>
-                            <option>Checkboxes</option>
-                        </select>
-                    </div>
-                    <div class="fields-form">
-                        <span class="glyphicon glyphicon-plus"></span>
-                    </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <form>
+                        <div class="form-group">
+                            <label for="newForm">Add New Field:</label>
+                            <select ng-model="model.fieldType" class="form-control" id="newForm">
+                                <option>Text</option>
+                                <option>Text Area</option>
+                                <option>Date</option>
+                                <option>Options</option>
+                                <option>Checkboxes</option>
+                                <option>Radios</option>
+                            </select>
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <div class="col-xs-4">
+                    <span ng-click="addField(model.fieldType)" href="#" class="glyphicon glyphicon-plus"></span>
+                </div>
+            </div>
+
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="firstName" class="fields-label">First Name:</label>-->
+                    <!--<div class="fields-form col-xs-10">-->
+                        <!--<input type="text" class="form-control fields-form" id="firstName" placeholder="First Name">-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="lastName" class="fields-label">Last Name:</label>-->
+                    <!--<div class="col-xs-10 fields-form">-->
+                        <!--<input type="text" class="form-control fields-form" id="lastName" placeholder="Last Name">-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="dateOfBirth" class="fields-label">Date of Birth:</label>-->
+                    <!--<div class="fields-form col-xs-10">-->
+                        <!--<input type="date" class="form-control fields-form" id="dateOfBirth">-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="gender" class="fields-label">Gender:</label>-->
+                    <!--<div class="col-xs-10 fields-form">-->
+                        <!--<select id="gender" class="form-control fields-form">-->
+                            <!--<option>Male</option>-->
+                            <!--<option>Female</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="fields-label">Role:</label>-->
+                    <!--<div class="col-xs-10 fields-form">-->
+                        <!--<div class="checkbox">-->
+                            <!--<label>-->
+                                <!--<input type="checkbox" value="">-->
+                                <!--Admin-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="checkbox">-->
+                            <!--<label>-->
+                                <!--<input type="checkbox" value="">-->
+                                <!--Student-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="checkbox">-->
+                            <!--<label>-->
+                                <!--<input type="checkbox" value="">-->
+                                <!--User-->
+                            <!--</label>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+            <!--<br><br><br>-->
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label class="fields-label">License Agreement:</label>-->
+                    <!--<div class="col-xs-10 fields-form">-->
+                        <!--<div class="radio">-->
+                            <!--<label>-->
+                                <!--<input type="radio" name="licenseAgreement" id="licenseAgreement1" value="yes" checked>-->
+                                <!--Yes-->
+                            <!--</label>-->
+                        <!--</div>-->
+                        <!--<div class="radio">-->
+                            <!--<label>-->
+                                <!--<input type="radio" name="licenseAgreement" id="licenseAgreement2" value="no" checked>-->
+                                <!--No-->
+                            <!--</label>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        <!--<span class="glyphicon glyphicon-menu-hamburger"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
+
+            <!--<br><br>-->
+            <!--<form>-->
+                <!--<div class="form-group">-->
+                    <!--<label for="newField" class="fields-label">Add New Field:</label>-->
+                    <!--<div class="fields-form col-xs-10">-->
+                        <!--<select id="newField" class="form-control fields-form">-->
+                            <!--<option>Single Line Text</option>-->
+                            <!--<option>Date</option>-->
+                            <!--<option>Dropdown</option>-->
+                            <!--<option>Checkboxes</option>-->
+                        <!--</select>-->
+                    <!--</div>-->
+                    <!--<div class="fields-form">-->
+                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</form>-->
 
         </div>
     </div>

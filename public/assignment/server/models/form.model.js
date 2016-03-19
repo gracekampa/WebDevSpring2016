@@ -19,7 +19,8 @@ module.exports = function(db, app) {
         var newForm = {
             _id: "id:" + (new Date()).getTime(),
             title: form.title,
-            userId: userId
+            userId: userId,
+            fields: []
         };
 
         mock.push(newForm);
@@ -41,7 +42,7 @@ module.exports = function(db, app) {
         return mock;
     }
 
-    function findFormById (formId) {
+    function findFormById(formId) {
         for (var i in mock) {
             if (mock[i]._id === formId) {
                 return mock[i];
@@ -50,7 +51,7 @@ module.exports = function(db, app) {
         return null;
     }
 
-    function findFormByUserId (userId) {
+    function findFormByUserId(userId) {
         for (var i in mock) {
             if (mock[i].userId === userId) {
                 return mock[i];

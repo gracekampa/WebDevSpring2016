@@ -39,7 +39,7 @@ module.exports = function(db, app) {
 
     function findUserById(id) {
         for(var i=0; i<mock.length; i++) {
-            if(mock[i]._id == id) {
+            if(mock[i].id == id) {
                 return mock[i];
             }
         }

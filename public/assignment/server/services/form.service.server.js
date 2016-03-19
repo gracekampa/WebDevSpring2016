@@ -11,14 +11,11 @@ module.exports = function (app, model, db) {
 
     function createForm(req, res) {
         var userId = req.params.userId;
-        model.createForm(userId);
+        var form = req.body;
+        model.createForm(userId, form);
         res.send(200);
     }
 
-    function getAllUsers(req, res) {
-        var users = model.findAllUsers();
-        res.json(users);
-    }
 
     function getFormByUserId(req, res) {
         var userId = req.params.userId;
@@ -31,7 +28,7 @@ module.exports = function (app, model, db) {
     }
 
     function getFormById(req, res) {
-        var id = req.params._id;
+        var id = req.params.formId;
         var form = model.findFormById(id);
         if (form) {
             res.json(form);
@@ -40,31 +37,9 @@ module.exports = function (app, model, db) {
         res.json({message: "Form not found"});
     }
 
-    function getUserByUsername(req, res) {
-        var username = req.params.username;
-        var user = model.findUserByUsername(username);
-        if (user) {
-            res.json(user);
-            return;
-        }
-        res.json({message: "User not found"});
-    }
-
-    function getUserByCredentials(req, res) {
-        var credentials = [
-            {   username: req.params.username,
-                password: req.params.password
-            }]
-        var user = model.findUserByUsername(credentials);
-        if (credentials) {
-            res.json(credentials);
-            return;
-        }
-        res.json({message: "User not found"});
-    }
 
     function updateFormById(req, res) {
-        var id = req.params._id;
+        var id = req.params.formId;
         var form = req.body;
         form = model.updateForm(id, form);
         if (form) {
@@ -75,7 +50,7 @@ module.exports = function (app, model, db) {
     }
 
     function deleteFormById(req, res) {
-        var id = req.params._id;
+        var id = req.params.formId;
         form = model.deleteForm(id);
         if (form) {
             res.send(200);
