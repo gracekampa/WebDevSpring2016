@@ -1,0 +1,11 @@
+<div class="col-sm-3 col-md-2 sidebar">
+    <ul class="nav nav-sidebar">
+        <li ng-class="{'active' : $location.url().indexOf('home') != -1}"><a href="#/home">home</a></li>
+        <li ng-show="currentUser"
+            ng-class="{'active' : $location.url().indexOf('profile') != -1}"><a href="#/profile">profile</a></li>
+        <li ng-show="currentUser && currentUser.roles.indexOf('admin') >= 0"
+            ng-class="{'active' : $location.url().indexOf('admin') != -1}"><a href="#/admin">admin</a></li>
+        <li ng-show="currentUser"
+            ng-class="{'active' : $location.url().indexOf('forms') != -1}"><a href="#/forms">forms</a></li>
+    </ul>
+</div>
