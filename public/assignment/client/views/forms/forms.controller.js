@@ -12,7 +12,7 @@
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
         $scope.getForms = getForms;
-        
+
 
         $scope.form = {};
 

@@ -1,8 +1,36 @@
 var express = require('express');
 var app = express();
-app.use(express.static(__dirname + '/public'));
+var bodyParser = require('body-parser');
+// install and require the mongoose library
+var mongoose = require('mongoose');
+
+// create a default connection string
+var connectionString = 'mongodb://127.0.0.1:27017/cs5610fall2015exmpl1';
+
+// use remote connection string
+// if running in remote server
+if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+    connectionString = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+        process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+        process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+        process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+        process.env.OPENSHIFT_APP_NAME;
+}
+
+// connect to the database
+var db = mongoose.connect(connectionString);
+
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/WebAppMaker'));
+
+require("./app.js")(app, db, mongoose);
+
+// pass db and mongoose reference to server side application module
+require("./public/project/server/app.js")(app, db, mongoose);
 
 // for first setup of dev environment "hello world" page
 app.get('/hello', function(req, res){
