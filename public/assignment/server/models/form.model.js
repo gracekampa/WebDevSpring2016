@@ -1,9 +1,9 @@
 /**
  * Created by OWNER on 3/17/2016.
  */
-var mock = require("./form.mock.json");
+//var mock = require("./form.mock.json");
 
-module.exports = function(db, app) {
+module.exports = function() {
     var api = {
         createForm: createForm,
         findFormById: findFormById,

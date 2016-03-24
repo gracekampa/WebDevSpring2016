@@ -29,7 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/WebAppMaker'));
 
-//require("./public/assignment/server/app.js")(app, db, mongoose);
+require("./public/assignment/server/app.js")(app, db, mongoose);
 
 // pass db and mongoose reference to server side application module
 require("./public/project/server/app.js")(app, db, mongoose);
