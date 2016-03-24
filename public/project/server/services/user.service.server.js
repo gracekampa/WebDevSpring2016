@@ -16,6 +16,7 @@ module.exports = function(app, movieModel, userModel) {
         res.json(user);
     }
 
+    var test = "test"
     function profile(req, res) {
         var userId = req.params.userId;
         var user = null;
