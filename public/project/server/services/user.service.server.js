@@ -111,7 +111,7 @@ module.exports = function(app, movieModel, userModel) {
     function login(req, res) {
         var credentials = req.body;
 
-        //console.log(credentials);
+        console.log("Inside server login");
 
         userModel.findUserByCredentials(credentials)
             .then(
@@ -138,6 +138,8 @@ module.exports = function(app, movieModel, userModel) {
 
     function register(req, res) {
         var user = req.body;
+
+        console.log("Inside register server");
 
         userModel.createUser(user)
             // handle model promise
