@@ -1,8 +1,9 @@
 /**
  * Created by OWNER on 3/22/2016.
  */
-module.exports = function(mongoose) {
+module.exports = function() {
 
+    var mongoose = require("mongoose");
     // use mongoose to declare a movie schema
     var MovieSchema = mongoose.Schema({
         imdbID: String,

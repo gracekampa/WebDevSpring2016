@@ -4,7 +4,8 @@
 var q = require("q");
 
 // pass db and mongoose reference to model
-module.exports = function(db, mongoose) {
+module.exports = function(db) {
+    var mongoose = require("mongoose");
 
     // load movie schema from movie model
     var MovieSchema = require("./movie.schema.server.js")(mongoose);

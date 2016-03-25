@@ -1,7 +1,9 @@
 /**
  * Created by OWNER on 3/22/2016.
  */
-module.exports = function(mongoose) {
+module.exports = function() {
+
+    var mongoose = require("mongoose");
 
     var MovieSchema = require("./movie.schema.server.js")(mongoose);
 
