@@ -20,14 +20,14 @@
             if(!user) {
                 return;
             }
-            UserService
-                .findUserByCredentials({
-                    username: user.username,
-                    password: user.password
-                })
-                .then(function(response){
-
-                });
+            //UserService
+            //    .findUserByCredentials({
+            //        username: user.username,
+            //        password: user.password
+            //    })
+            //    .then(function(response){
+            //
+            //    });
 
             UserService
                 .login({

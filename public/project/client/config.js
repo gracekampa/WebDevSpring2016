@@ -10,9 +10,8 @@
         $routeProvider
             .when("/home",{
                 templateUrl: "views/home/home.view.html",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controller: "HomeController",
+                controllerAs: "model"
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
@@ -47,10 +46,7 @@
             .when("/search", {
                 templateUrl: "views/search/search.view.html",
                 controller: "SearchController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controllerAs: "model"
             })
             .when("/search/:title", {
                 templateUrl: "views/search/search.view.html",
@@ -59,10 +55,7 @@
             .when("/details/:imdbID", {
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
-                controllerAs: "model",
-                resolve: {
-                    getLoggedIn: getLoggedIn
-                }
+                controllerAs: "model"
             })
             .otherwise({
                 redirectTo: "/home"

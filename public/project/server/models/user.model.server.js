@@ -1,13 +1,15 @@
 /**
  * Created by OWNER on 3/22/2016.
  */
-//var mock = require("./user.mock.json");
+var mock = require("./user.mock.json");
 
 // load q promise library
 var q = require("q");
 
 // pass db and mongoose reference to model
 module.exports = function(db, mongoose) {
+
+    var mongoose = require("mongoose");
 
     // load user schema
     var UserSchema = require("./user.schema.server.js")(mongoose);
@@ -110,7 +112,7 @@ module.exports = function(db, mongoose) {
     }
 
     function findUserByCredentials(credentials) {
-
+        console.log(credentials);
         var deferred = q.defer();
 
         // find one retrieves one document

@@ -6,7 +6,7 @@ var multer = require('multer');
 var mongoose = require('mongoose');
 
 // create a default connection string
-var connectionString = 'mongodb://127.0.0.1:27017/cs5610fall2015exmpl1';
+var connectionString = 'mongodb://127.0.0.1:27017/cs4550';
 
 // use remote connection string
 // if running in remote server
@@ -26,8 +26,11 @@ var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer());
+app.use(express.cookieParser());
+app.use(express.session({secret: '1234567890QWERTY'}));
+
 app.use(express.static(__dirname + '/public'));
-app.use(express.static(__dirname + '/WebAppMaker'));
 
 require("./public/assignment/server/app.js")(app, db, mongoose);
 

@@ -11,6 +11,7 @@
         var api = {
             findMovieByTitle: findMovieByTitle,
             findMovieByImdbId: findMovieByImdbId
+            //findNewestMovies: findNewestMovies
         };
 
         return api;
@@ -25,5 +26,10 @@
             // use JSONP since API does not support CORS
             return $http.jsonp("http://www.omdbapi.com/?i="+imdbId+"&callback=JSON_CALLBACK");
         }
+
+        //function findNewestMovies() {
+        //    var date = new Date().year;
+        //    return $http.jsonp("http://www.omdbapi.com/?y="+date+"&callback=JSON_CALLBACK");
+        //}
     }
 })();

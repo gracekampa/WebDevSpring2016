@@ -1,7 +1,7 @@
 /**
  * Created by OWNER on 3/17/2016.
  */
-//var mock = require("./user.mock.json");
+var mock = require("./user.mock.json");
 
 module.exports = function() {
     var api = {
