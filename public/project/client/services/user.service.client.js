@@ -109,7 +109,8 @@
             getCurrentUser: getCurrentUser,
             register: register,
             logout: logout,
-            getProfile: getProfile
+            getProfile: getProfile,
+            updateUser: updateUser
         };
         return api;
 
@@ -140,6 +141,10 @@
         function login(credentials) {
             console.log('Inside login client');
             return $http.post("/api/project/login", credentials);
+        }
+
+        function updateUser (user) {
+            return $http.put("/api/user/"+user.username, user);
         }
     }
 })();

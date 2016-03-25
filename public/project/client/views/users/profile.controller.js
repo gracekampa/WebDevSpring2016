@@ -6,7 +6,7 @@
         .module("MovieApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, UserService, $location, $rootScope) {
+    function ProfileController($scope, UserService, $location, $rootScope, $routeParams) {
 
         //$scope.error = null;
         //$scope.message = null;
@@ -36,20 +36,35 @@
         }
         return init();
 
-        function update(user) {
-            // same validation as register
-            vm.error = null;
-            vm.message = null;
+        //function update(user) {
+        //    // same validation as register
+        //    vm.error = null;
+        //    vm.message = null;
+        //
+        //    $rootScope.currentUser = UserService.updateUser(user._id, user,
+        //    function(user) {
+        //        if (user) {
+        //            vm.message = "User updated successfully";
+        //            UserService.setCurrentUser($rootScope.currentUser);
+        //        } else {
+        //            vm.message = "Unable to update the user";
+        //        }
+        //    });
+        //}
 
-            $rootScope.currentUser = UserService.updateUser(user._id, user,
-            function(user) {
-                if (user) {
-                    vm.message = "User updated successfully";
-                    UserService.setCurrentUser($rootScope.currentUser);
-                } else {
-                    vm.message = "Unable to update the user";
-                }
-            });
+        function update(user) {
+            UserService
+                .updateUser(user)
+                .then (
+                    function (response) {
+                        vm.message = "User updated successfully";
+                        UserService.setCurrentUser($rootScope.currentUser);
+                    },
+                    function (err) {
+                        vm.error = err;
+                        vm.message = "Unable to update the user";
+                    }
+                );
         }
     }
 })();

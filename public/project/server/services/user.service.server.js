@@ -106,6 +106,7 @@ module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/logout", logout);
     app.post("/api/project/register", register);
     app.get("/api/project/profile/:userId", profile);
+    app.put ("/api/user/:username", updateUser);
 
 
     function login(req, res) {
@@ -185,6 +186,21 @@ module.exports = function(app, movieModel, userModel) {
                 },
                 // send error if promise rejected
                 function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateUser (req, res) {
+        var username = req.params.username;
+        var user = req.body;
+        userModel
+            .updateUser(username, user)
+            .then (
+                function (stats) {
+                    res.send(200);
+                },
+                function (err) {
                     res.status(400).send(err);
                 }
             );

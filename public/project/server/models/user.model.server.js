@@ -22,7 +22,8 @@ module.exports = function(db, mongoose) {
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        updateUser: updateUser
     };
     return api;
 
@@ -135,6 +136,23 @@ module.exports = function(db, mongoose) {
 
             });
 
+        return deferred.promise;
+    }
+
+    function updateUser (username, user) {
+        var deferred = q.defer();
+        UserModel
+            .update (
+                {username: username},
+                {$set: user},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 }
