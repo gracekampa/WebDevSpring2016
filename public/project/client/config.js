@@ -29,6 +29,14 @@
                     checkLoggedIn: checkLoggedIn
                 }
             })
+            .when("/profileEdit/:username?", {
+                templateUrl: "views/users/profileEdit.view.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
+            })
             .when("/admin", {
                 templateUrl: "views/admin/adminmovies.view.html",
                 controller: "AdminMoviesController"
