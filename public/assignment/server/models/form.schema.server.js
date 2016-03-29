@@ -18,6 +18,6 @@ module.exports = function() {
         // store movie documents in this collection
     }, {collection: 'project.omdb.movie'});
 
-    return MovieSchema;
+    return FormSchema;
 
 };
