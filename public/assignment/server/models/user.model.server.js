@@ -3,7 +3,7 @@
  */
 var mock = require("./user.mock.json");
 
-module.exports = function() {
+module.exports = function(db) {
     //var api = {
     //    createUser: createUser,
     //    findUserById: findUserById,
