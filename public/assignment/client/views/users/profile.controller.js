@@ -8,39 +8,73 @@
 
     function ProfileController($scope, UserService, $location, $rootScope) {
 
-        $scope.error = null;
-        $scope.message = null;
+        var vm = this;
+        vm.error = null;
+        vm.message = null;
+        vm.update = update;
 
-        $rootScope.currentUser = UserService.getCurrentUser();
-        if (!$rootScope.currentUser) {
-            $location.url("/home");
+        var username = $rootScope.currentUser.username;
+        console.log(username);
+
+        function init() {
+            UserService
+                .getProfile()
+                .then(function (response) {
+                    vm.profile = response.data;
+                    console.log(vm.profile);
+                });
         }
-
-        $scope.update = update;
+        return init();
 
         function update(user) {
-            // same validation as register
-            $scope.error = null;
-            $scope.message = null;
-
-            $rootScope.currentUser = UserService.updateUser(user._id, user)
-                .then(function(response) {
-                    if (response.data) {
-                        $rootScope.data = response;
-                        $scope.message = "User updated successfully";
+            UserService
+                .updateUser(user)
+                .then (
+                    function(response) {
+                        vm.profile = response.data;
+                        vm.message = "User updated successfully";
                         UserService.setCurrentUser($rootScope.currentUser);
+                    },
+                    function (err) {
+                        vm.error = err;
+                        vm.message = "Unable to update the user";
                     }
-                    else {
-                        $scope.message = "Unable to update the user";
-                    }
-                });
-
-            //if (user) {
-            //    $scope.message = "User updated successfully";
-            //    UserService.setCurrentUser($rootScope.currentUser);
-            //} else {
-            //    $scope.message = "Unable to update the user";
-            //}
+                );
         }
+
+        //$scope.error = null;
+        //$scope.message = null;
+        //
+        //$rootScope.currentUser = UserService.getCurrentUser();
+        //if (!$rootScope.currentUser) {
+        //    $location.url("/home");
+        //}
+        //
+        //$scope.update = update;
+        //
+        //function update(user) {
+        //    // same validation as register
+        //    $scope.error = null;
+        //    $scope.message = null;
+        //
+        //    $rootScope.currentUser = UserService.updateUser(user._id, user)
+        //        .then(function(response) {
+        //            if (response.data) {
+        //                $rootScope.data = response;
+        //                $scope.message = "User updated successfully";
+        //                UserService.setCurrentUser($rootScope.currentUser);
+        //            }
+        //            else {
+        //                $scope.message = "Unable to update the user";
+        //            }
+        //        });
+        //
+        //    //if (user) {
+        //    //    $scope.message = "User updated successfully";
+        //    //    UserService.setCurrentUser($rootScope.currentUser);
+        //    //} else {
+        //    //    $scope.message = "Unable to update the user";
+        //    //}
+        //}
     }
 })();

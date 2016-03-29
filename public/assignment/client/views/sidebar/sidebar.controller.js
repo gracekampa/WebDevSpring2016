@@ -6,13 +6,23 @@
         .module("FormBuilderApp")
         .controller("SidebarController", SidebarController);
 
-    function SidebarController($location, $scope, UserService) {
-        $scope.$location = $location;
-        $scope.logout = logout;
+    function SidebarController($location, UserService) {
+        var vm = this;
+
+        vm.logout = logout;
+
+        function init() {
+            vm.$location = $location;
+        }
+        init();
 
         function logout() {
-            UserService.setCurrentUser(null);
-            $location.url("/home");
+            UserService
+                .logout()
+                .then(function(){
+                    UserService.setCurrentUser(null);
+                    $location.url("/home");
+                });
         }
     }
 })();
