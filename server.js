@@ -70,11 +70,6 @@ var db = mongoose.connect(connectionString);
 var ipaddress   = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port        = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
-//app.listen(port, ipaddress, function () {
-//    console.log( "Listening on " + ipaddress + ", server_port " + port )
-//});
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -85,7 +80,7 @@ app.use(express.session({secret: '1234567890QWERTY'}));
 
 app.use(express.static(__dirname + '/public'));
 
-require("./public/assignment/server/app.js")(app);
-require("./public/project/server/app.js")(app);
+require("./public/assignment/server/app.js")(app, db, mongoose);
+require("./public/project/server/app.js")(app, db, mongoose);
 
 app.listen(port, ipaddress);

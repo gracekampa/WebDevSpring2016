@@ -13,12 +13,8 @@ module.exports = function() {
         password: String,
         firstName: String,
         lastName: String,
-        email: String,
-        roles: [String],
-        //// imdb ids of movies this user likes
-        //likes: [String],
-        //// movies this user likes
-        //likesMovies: [MovieSchema],
+        email: [String],
+        roles: [String]
         // collection property sets
         // collection name to 'user'
     }, {collection: 'assignment.user'});

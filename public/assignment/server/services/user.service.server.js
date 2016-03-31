@@ -1,100 +1,7 @@
 /**
- * Created by OWNER on 3/14/2016.
+ * Created by OWNER on 3/22/2016.
  */
-//module.exports = function (app, model, db) {
-//
-//    app.post("/api/assignment/user", createUser);
-//    app.get("/api/assignment/user", getAllUsers);
-//    app.get("/api/assignment/user/:id", getUserById);
-//    app.get("/api/assignment/user?username=username", getUserByUsername);
-//    app.get("/api/assignment/user?username=alice&password=wonderland", getUserByCredentials);
-//    app.put("/api/assignment/user/:id", updateUserById);
-//    app.delete("/api/assignment/user/:id", deleteUserById);
-//
-//    function createUser(req, res) {
-//        var user = req.body;
-//        user._id = now.getTime();
-//        model.createUser(user);
-//        res.send(200);
-//    }
-//
-//    function getAllUsers(req, res) {
-//        var users = model.findAllUsers();
-//        res.json(users);
-//    }
-//
-//    function getUserById(req, res) {
-//        var id = req.params.id;
-//        var user = model.findUserById(id);
-//        if (user) {
-//            res.json(user);
-//            return;
-//        }
-//        res.json({message: "User not found"});
-//    }
-//
-//    function getUserByUsername(req, res) {
-//        var username = req.query.username;
-//        var user = model.findUserByUsername(username);
-//        if (user) {
-//            res.json(user);
-//            return;
-//        }
-//        res.json({message: "User not found"});
-//    }
-//
-//    function getUserByCredentials(req, res) {
-//        //var credentials = [
-//        //    {   username: req.query.username,
-//        //        password: req.query.password
-//        //    }]
-//        //var user = model.findUserByUsername(credentials.username);
-//        //if (credentials) {
-//        //    res.json(user);
-//        //    return;
-//        //}
-//        //res.json({message: "User not found"});
-//
-//        var credentials = {
-//            username: req.query.username,
-//            password: req.query.password
-//        };
-//        var user = model.findUserByCredentials(credentials);
-//
-//        res.json(user);
-//
-//
-//        //if (user) {
-//        //    res.json(user);
-//        //    return;
-//        //}
-//        //res.send(null);
-//    }
-//
-//    function updateUserById(req, res) {
-//        var id = req.params.id;
-//        var user = req.body;
-//        user = model.updateUser(id, user);
-//        if (user) {
-//            res.json(user);
-//            return;
-//        }
-//        res.json({message: "User not found"});
-//    }
-//
-//    function deleteUserById(req, res) {
-//        var id = req.params.id;
-//        user = model.deleteUser(id);
-//        if (user) {
-//            res.send(200);
-//            return;
-//        }
-//        res.json({message: "User not found"});
-//    }
-//
-//}
-
-module.exports = function(app, formModel, userModel) {
+module.exports = function(app, userModel) {
 
     app.post("/api/project/login", login);
     app.get("/api/project/loggedin", loggedin);
@@ -162,8 +69,6 @@ module.exports = function(app, formModel, userModel) {
                 // first retrieve the user by user id
                 function(doc) {
                     user = doc;
-                    // fetch courses this user likes
-                    //return movieModel.findMoviesByImdbIDs(doc.likes);
                 },
                 // reject promise if error
                 function(err) {
@@ -171,12 +76,7 @@ module.exports = function(app, formModel, userModel) {
                 }
             )
             .then(
-                // fetch movies this user likes
-                function(movies) {
-                    // list of movies this user likes
-                    // movies are not stored in database
-                    // only added for UI rendering
-                    //user.likesMovies = movies;
+                function(user) {
                     res.json(user);
                 },
                 // send error if promise rejected
@@ -192,10 +92,8 @@ module.exports = function(app, formModel, userModel) {
         var user = req.body;
         userModel
             .updateUser(username, user)
-            .then (
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
+            .then(
+                function(stats) {
                     res.send(200);
                 },
                 function (err) {

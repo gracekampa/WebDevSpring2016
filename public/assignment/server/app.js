@@ -1,12 +1,12 @@
 /**
- * Created by OWNER on 3/10/2016.
+ * Created by OWNER on 3/22/2016.
  */
-module.exports = function (db, mongoose, app) {
-    var userModel = require("./models/user.model.server.js")(db, mongoose);
-    var formModel = require("./models/form.model.server.js")(db, mongoose);
-    //var fieldModel = require("./models/field.model.server.js")();
+module.exports = function(app, db, mongoose) {
 
-    var userService = require("./services/user.service.server.js")(app, formModel, userModel);
-    var formService = require("./services/form.service.server.js")(app, formModel);
-    var fieldService = require("./services/field.service.server.js")(app, formModel);
-};
+    // pass db and mongoose reference to model
+    var userModel    = require("./models/user.model.server.js")(db, mongoose);
+    var formModel   = require("./models/form.model.server.js")(db, mongoose);
+
+    var userService  = require("./services/user.service.server.js") (app, userModel);
+    var formService = require("./services/form.service.server.js") (app, formModel);
+}

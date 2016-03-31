@@ -1,57 +1,24 @@
 /**
  * Created by OWNER on 2/23/2016.
  */
-//(function(){
-//    angular
-//        .module("FormBuilderApp")
-//        .controller("LoginController", loginController);
-//
-//    function loginController ($scope, UserService, $location, $rootScope) {
-//
-//        $scope.login = login;
-//        ////$scope.user = {};
-//        //function login (user) {
-//        //    UserService.findUserByCredentials({username: user.username, password: user.password});
-//        //   console.log(response);
-//        //    if (user) {
-//        //        UserService.setCurrentUser(user);
-//        //        $location.url("/profile");
-//        //    }
-//        //}
-//
-//        function login(user) {
-//            if(!user) {
-//                return;
-//            }
-//            UserService
-//                .findUserByCredentials(user.username, user.password)
-//                .then(function(response){
-//                    if(response.data) {
-//                        UserService.setCurrentUser(response.data);
-//                        $location.url("/profile");
-//                    }
-//                });
-//        }
-//    }
-//})();
-
 (function(){
     angular
         .module("FormBuilderApp")
         .controller("LoginController", loginController);
 
-    function loginController (UserService, $location) {
+    function loginController (UserService, $location, $scope) {
         var vm = this;
 
         vm.login = login;
+        //$scope.message = message;
 
-        function init() {
-        }
+        function init() {}
         init();
 
         function login(user) {
             console.log('Inside Login');
-            if(!user) {
+            if(!user || !user.username || !user.password) {
+                //$scope.message = "Please fill in the required fields.";
                 return;
             }
             //UserService
@@ -73,6 +40,10 @@
                         UserService.setCurrentUser(response.data);
                         $location.url("/profile");
                     }
+                },
+                function(error) {
+                    //$scope.message = "Invalid credentials.";
+                    return;
                 });
         }
     }

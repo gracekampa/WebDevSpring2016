@@ -4,19 +4,16 @@
 module.exports = function() {
 
     var mongoose = require("mongoose");
-    // use mongoose to declare a movie schema
+    var FieldSchema = require("./field.schema.server.js")(mongoose);
+    // use mongoose to declare a field schema
     var FormSchema = mongoose.Schema({
-        imdbID: String,
-        title: String,
-        poster: String,
-        // ids of users that like this movie
-        likes: [String],
-        // list of users that like this movie
-        userLikes: [
-            {username: String}
-        ],
+        userId: String,
+        title: {type: String, default: "New Form"},
+        fields: [FieldSchema],
+        created: {type: Date, default: Date.now()},
+        updated: {type: Date, default: Date.now()}
         // store movie documents in this collection
-    }, {collection: 'project.omdb.movie'});
+    }, {collection: 'assignment.form'});
 
     return FormSchema;
 

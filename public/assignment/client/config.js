@@ -10,11 +10,9 @@
         $routeProvider
             .when("/home",{
                 templateUrl: "views/home/home.view.html",
-                controller: "HomeController",
-                controllerAs: "model"
-                //resolve: {
-                //    getLoggedIn: getLoggedIn
-                //}
+                resolve: {
+                    getLoggedIn: getLoggedIn
+                }
             })
             .when("/register", {
                 templateUrl: "views/users/register.view.html",
@@ -35,11 +33,18 @@
             })
             .when("/forms", {
                 templateUrl: "views/forms/forms.view.html",
-                controller: "FormController"
+                controller: "FormController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/fields", {
                 templateUrl: "views/forms/fields.view.html",
-                controller: "FieldsController"
+                controller: "FieldsController",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",

@@ -1,75 +1,13 @@
 /**
- * Created by OWNER on 3/17/2016.
+ * Created by OWNER on 3/22/2016.
  */
-var mock = require("./user.mock.json");
+//var mock = require("./user.mock.json");
 
-module.exports = function(db) {
-    //var api = {
-    //    createUser: createUser,
-    //    findUserById: findUserById,
-    //    findAllUsers: findAllUsers,
-    //    updateUser: updateUser,
-    //    deleteUser: deleteUser,
-    //    findUserByUsername: findUserByUsername,
-    //    findUserByCredentials: findUserByCredentials
-    //};
-    //return api;
-    //
-    //function createUser (user) {
-    //    var newUser = {
-    //        _id: "id:" + (new Date()).getTime(),
-    //        username: user.username,
-    //        password: user.password
-    //    };
-    //    mock.push(newUser);
-    //    return newUser;
-    //}
-    //
-    //function updateUser(userId, user) {
-    //    var idx = mock.indexOf(findUserById(userId));
-    //    mock[idx].firstName = user.firstName;
-    //    mock[idx].lastName = user.lastName;
-    //    mock[idx].users[u].password = user.password;
-    //    return mock;
-    //}
-    //
-    //function findAllUsers () {
-    //    return mock;
-    //}
-    //
-    //function findUserById(id) {
-    //    for(var i=0; i<mock.length; i++) {
-    //        if(mock[i].id == id) {
-    //            return mock[i];
-    //        }
-    //    }
-    //}
-    //
-    //function deleteUser (id) {
-    //    var user = findUserById(id);
-    //    var idx = mock.indexOf(user);
-    //    mock.splice(idx, 1);
-    //    return mock;
-    //}
-    //
-    //function findUserByUsername(username) {
-    //    for (var u in mock) {
-    //        if (mock[u].username === username) {
-    //            return mock[u];
-    //        }
-    //    }
-    //    return null;
-    //}
-    //
-    //function findUserByCredentials(credentials) {
-    //    for (var u in mock) {
-    //        if (mock[u].username === credentials.username &&
-    //            mock[u].password === credentials.password) {
-    //            return mock[u];
-    //        }
-    //    }
-    //    return null;
-    //}
+// load q promise library
+var q = require("q");
+
+// pass db and mongoose reference to model
+module.exports = function(db, mongoose) {
 
     var mongoose = require("mongoose");
 
@@ -77,50 +15,17 @@ module.exports = function(db) {
     var UserSchema = require("./user.schema.server.js")(mongoose);
 
     // create user model from schema
-    var UserModel = mongoose.model('User', UserSchema);
+    var UserModel = mongoose.model('FormUser', UserSchema);
 
     var api = {
         findUserByCredentials: findUserByCredentials,
         createUser: createUser,
         findUserById: findUserById,
         findUsersByIds: findUsersByIds,
-        //userLikesMovie: userLikesMovie,
         updateUser: updateUser
     };
     return api;
 
-    // add movie to user likes
-    //function userLikesMovie (userId, movie) {
-    //
-    //    var deferred = q.defer();
-    //
-    //    // find the user
-    //    UserModel.findById(userId, function (err, doc) {
-    //
-    //        // reject promise if error
-    //        if (err) {
-    //            deferred.reject(err);
-    //        } else {
-    //
-    //            // add movie id to user likes
-    //            doc.likes.push (movie.imdbID);
-    //
-    //            // save user
-    //            doc.save (function (err, doc) {
-    //
-    //                if (err) {
-    //                    deferred.reject(err);
-    //                } else {
-    //
-    //                    // resolve promise with user
-    //                    deferred.resolve (doc);
-    //                }
-    //            });
-    //        }
-    //    });
-    //
-    //    return deferred;
-    //}
 
     function findUsersByIds (userIds) {
         var deferred = q.defer();
