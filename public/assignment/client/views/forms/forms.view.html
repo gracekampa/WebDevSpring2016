@@ -31,10 +31,10 @@
                 <tr ng-repeat="form in model.forms">
                     <td><a href="#/fields">{{form.title}}</a></td>
                     <td>
-                        <a ng-click="model.deleteForm($index)">
+                        <a ng-click="model.deleteForm(form)">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
-                        <a ng-click="model.selectForm($index)">
+                        <a ng-click="model.selectForm(form)">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                     </td>

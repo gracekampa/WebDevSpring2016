@@ -18,24 +18,29 @@
             //getAllForms: getAllForms,
             createFormForUser: createFormForUser,
             findAllFormsForUser: findAllFormsForUser,
-            deleteFormById: deleteFormById
-            //updateFormById: updateFormById,
-            //findFormById: findFormById
+            deleteFormById: deleteFormById,
+            updateFormById: updateFormById,
+            findFormById: findFormById
 
         };
         return api;
 
-        function  deleteFormById(form) {
-            return $http.delete("/api/form/"+form._id);
+        function  deleteFormById(user, form) {
+            console.log("client"+form.title);
+            return $http.delete("/api/user/"+user._id+"/form/"+form._id);
+            //return $http.delete ("/api/form/"+form._id);
+        }
+
+        function updateFormById(formId, newForm) {
+            return $http.put("/api/assignment/form/"+formId, newForm);
         }
 
         //function updateFormById(form) {
         //    return $http.put("/api/form/"+form._id, form);
         //}
 
-        function findAllFormsForUser(user) {
-            console.log("Inside form client");
-            return $http.get("/api/user/" + user.username + "/form");
+        function findAllFormsForUser(userId) {
+            return $http.get("/api/assignment/user/" + userId + "/form");
         }
 
         function createFormForUser(form, user) {
@@ -43,9 +48,9 @@
             return $http.post("/api/user/" + user._id + "/form", form);
         }
 
-        //function findFormById(formId) {
-        //    return $http.get("/api/form" + formId);
-        //}
+        function findFormById(formId) {
+            return $http.get("/api/assignment/form/" + formId);
+        }
 
         //function getAllForms() {
         //    return api.forms;

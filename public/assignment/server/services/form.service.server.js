@@ -3,53 +3,60 @@
  */
 module.exports = function (app, formModel) {
     app.post   ("/api/user/:userId/form", createFormForUser);
-    app.get    ("/api/user/:username/form", findAllFormsForUser);
+    //app.get    ("/api/user/:userId/form", findAllFormsForUser);
+    app.get("/api/assignment/user/:userId/form", findAllFormsForUser);
     //app.get    ("/api/form/:formId", findApplicationById);
-    //app.delete ("/api/form/:formId", deleteFormById);
+    app.get    ("/api/assignment/form/:formId", updateFormById);
+    app.get    ("/api/assignment/form/:formId", findFormById);
+    app.delete ("/api/user/:userId/form/:formId", deleteFormById);
     app.get    ("/api/user/:userId/form", findAllFormsForUser);
 
+
     function findAllFormsForUser(req, res) {
-        console.log("Inside form server");
         var userId = req.params.userId;
+
         formModel
             .findAllFormsForUser(userId)
             .then (
-                function(user) {
-                    res.json(user);
+                function(forms) {
+                    res.json(forms);
                 },
-                function (err) {
+                function(err) {
                     res.status(400).send(err);
                 }
             );
     }
 
-    //function deleteFormById(req, res) {
-    //    var applicationId = req.params.applicationId;
-    //    formModel
-    //        .removeApplication(applicationId)
-    //        .then(
-    //            function(response) {
-    //                res.json(response.result);
-    //            },
-    //            function(err) {
-    //                res.status(400).send(err);
-    //            }
-    //        );
-    //}
+    function deleteFormById(req, res) {
+        var formId = req.params.formId;
+        var userId = req.params.userId;
+        console.log("service server: "+formId);
+        formModel
+            .removeForm(formId)
+            .then(
+                function(form) {
+                    //res.json(response.result);
+                    return formModel.findAllFormsForUser(userId);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
-    //function findApplicationById (req, res) {
-    //    var applicationId = req.params.applicationId;
-    //    applicationModel
-    //        .findApplicationById(applicationId)
-    //        .then(
-    //            function(application) {
-    //                res.json(application);
-    //            },
-    //            function(err) {
-    //                res.status(400).send(err);
-    //            }
-    //        );
-    //}
+    function findFormById (req, res) {
+        var formId = req.params.formId;
+        formModel
+            .findFormById(formId)
+            .then(
+                function(form) {
+                    res.json(form);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function createFormForUser(req, res) {
         console.log("Inside addding form server");
@@ -74,5 +81,21 @@ module.exports = function (app, formModel) {
                     res.status(400).send(err);
                 }
             )
+    }
+
+    function updateUser (req, res) {
+        console.log("Inside User Server");
+        var formId = req.params.formId;
+        var newForm = req.body;
+        formModel
+            .updateUser(formId, newForm)
+            .then(
+                function(stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
     }
 }

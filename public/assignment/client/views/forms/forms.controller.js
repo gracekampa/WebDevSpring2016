@@ -9,38 +9,77 @@
     function FormController($scope, FormService, $rootScope, $routeParams) {
 
         var vm = this;
-        vm.forms = null;
+        //$scope.forms = {};
         vm.addForm = addForm;
         vm.updateForm = updateForm;
         vm.deleteForm = deleteForm;
         vm.selectForm = selectForm;
 
-        function init () {
-            console.log("Inside form controller");
-            console.log($rootScope.currentUser);
+        vm.currentUser = $rootScope.currentUser;
+
+        $scope.form = {};
+
+        function init() {
             FormService
-                .findAllFormsForUser($rootScope.currentUser)
+                .findAllFormsForUser(vm.currentUser._id)
                 .then(
                     function(response) {
+                        if (response.data) {
+                            vm.forms = response.data;
+                        }
+                    });
+        }
+        init();
+
+
+        function addForm(form) {
+            var user = $rootScope.currentUser;
+            FormService
+                .createFormForUser(form, user)
+                .then (
+                    function(response) {
                         vm.forms = response.data;
-                        console.log("forms:"+vm.forms);
+                    },
+                    function(err) {
+                        vm.error = err;
+                    }
+                );
+
+        };
+
+        //function updateForm(form) {
+        //    $scope.forms[$scope.selectedFormIndex] = {
+        //        title: form.title
+        //    }
+        //};
+
+        function updateForm(form) {
+            FormService
+                .updateFormById(form._id, form)
+                .then(
+                    function(response) {
+                        if (response.data) {
+                            vm.form = response.data;
+                            //$scope.message = "User updated successfully";
+                            //console.log(vm.message);
+                            //UserService.setCurrentUser(vm.currentUser);
+                        }
                     },
                     function (err) {
                         vm.error = err;
+                        //$scope.error = "Unable to update the user";
+                        return;
                     }
-                )
+                );
         }
-        init ();
 
-        function addForm(form) {
-            console.log(form);
+        function deleteForm(form) {
             var user = $rootScope.currentUser;
+            console.log(form);
             FormService
-                .createFormForUser(form, user)
+                .deleteFormById(user, form)
                 .then (
                     function(response) {
-                        //$location.url("/user/"+user.username+"/form");
-                        //vm.forms.push(form);
                         vm.forms = response.data;
                     },
                     function(err) {
@@ -48,49 +87,28 @@
                     }
                 );
 
-
-            //var newForm = {
-            //    title : form.title
-            //};
-            //$scope.forms.push(newForm);
-            //
-            //var newForm = FormService.createFormForUser(form.userId, form,
-            //function(form) {
-            //    $scope.forms.push(form);
-            //});
-            //$scope.forms.push(newForm);
-
+            //$scope.forms.splice(index, 1);
         };
 
-        function updateForm(form) {
-            $scope.forms[$scope.selectedFormIndex] = {
-                title: form.title
-            }
-        };
 
-        function deleteForm(index) {
-            var user = $rootScope.currentUser;
+        function selectForm(form) {
             FormService
-                .createFormForUser(form, user)
-                .then (
-                    function(form) {
-                        //$location.url("/user/"+user.username+"/form");
-                        vm.forms.push(form);
+                .findFormById(form._id)
+                .then(
+                    function(response) {
+                        //$scope.form = response.data;
+                        //vm.form = {title: form.title};
+                        vm.form = form;
                     },
                     function(err) {
                         vm.error = err;
                     }
                 );
 
-            $scope.forms.splice(index, 1);
-        };
-
-
-        function selectForm(index) {
-            $scope.selectedFormIndex = index;
-            $scope.form = {
-                title: $scope.forms[index].title
-            };
+            //$scope.selectedFormIndex = index;
+            //$scope.form = {
+            //    title: $scope.forms[index].title
+            //};
         };
 
     }

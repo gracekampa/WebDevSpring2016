@@ -10,8 +10,8 @@ module.exports = function () {
     var api = {
         createFormForUser: createFormForUser,
         findAllFormsForUser: findAllFormsForUser,
-        //findApplicationById: findApplicationById,
-        //removeApplication: removeApplication,
+        findFormById: findFormById,
+        removeForm: removeForm,
         getMongooseModel: getMongooseModel
     };
     return api;
@@ -20,27 +20,39 @@ module.exports = function () {
         return Form;
     }
 
-    //function removeApplication(applicationId) {
-    //    return Application.remove().where("_id").equals(applicationId);
-    //}
-    //
-    //function findApplicationById (applicationId) {
-    //    return Application.findById (applicationId);
-    //}
+    function removeForm(formId) {
+        return Form.remove().where("_id").equals(formId);
+    }
+
+
+    function findFormById (formId) {
+        //return Form.findById (formId);
+
+        var deferred = q.defer();
+        Form.findById(formId,
+            function (err, form) {
+                if (!err) {
+                    deferred.resolve(form);
+                } else {
+                    deferred.reject(err);
+                }
+            });
+        return deferred.promise;
+    }
 
     function findAllFormsForUser(userId) {
+
         var deferred = q.defer();
         Form
             .find(
                 {userId: userId},
-                function (err, forms) {
+                function(err, forms) {
                     if (!err) {
                         deferred.resolve(forms);
                     } else {
                         deferred.reject(err);
                     }
-                }
-            );
+                });
         return deferred.promise;
     }
 
@@ -55,6 +67,23 @@ module.exports = function () {
                     deferred.reject(err);
                 }
             });
+        return deferred.promise;
+    }
+
+    function updateFormById(formId, newForm) {
+        var deferred = q.defer();
+        Form
+            .update (
+                {_id: formId},
+                {$set: newForm},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
         return deferred.promise;
     }
 };
