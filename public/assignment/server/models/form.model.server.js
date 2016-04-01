@@ -22,7 +22,20 @@ module.exports = function () {
     }
 
     function removeForm(formId) {
-        return Form.remove().where("_id").equals(formId);
+        //return Form.remove().where("_id").equals(formId);
+        var deferred = q.defer();
+        Form
+            .remove (
+                {_id: formId},
+                function (err, stats) {
+                    if(!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
     }
 
 

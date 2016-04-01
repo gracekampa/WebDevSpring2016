@@ -8,7 +8,7 @@ module.exports = function (app, formModel) {
     //app.get    ("/api/form/:formId", findApplicationById);
     app.put    ("/api/assignment/form/:formId", updateFormById);
     app.get    ("/api/assignment/form/:formId", findFormById);
-    app.delete ("/api/user/:userId/form/:formId", deleteFormById);
+    app.delete ("/api/assignment/user/:userId/form/:formId", deleteFormById);
     app.get    ("/api/user/:userId/form", findAllFormsForUser);
 
 
@@ -30,13 +30,20 @@ module.exports = function (app, formModel) {
     function deleteFormById(req, res) {
         var formId = req.params.formId;
         var userId = req.params.userId;
-        console.log("service server: "+formId);
         formModel
             .removeForm(formId)
             .then(
                 function(form) {
                     //res.json(response.result);
                     return formModel.findAllFormsForUser(userId);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            )
+            .then(
+                function(forms) {
+                    res.json(forms);
                 },
                 function(err) {
                     res.status(400).send(err);

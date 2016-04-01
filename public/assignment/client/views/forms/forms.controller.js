@@ -80,6 +80,7 @@
                 .deleteFormById(user, form)
                 .then (
                     function(response) {
+                        console.log(response.data);
                         vm.forms = response.data;
                     },
                     function(err) {
