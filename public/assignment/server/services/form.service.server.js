@@ -6,7 +6,7 @@ module.exports = function (app, formModel) {
     //app.get    ("/api/user/:userId/form", findAllFormsForUser);
     app.get("/api/assignment/user/:userId/form", findAllFormsForUser);
     //app.get    ("/api/form/:formId", findApplicationById);
-    app.get    ("/api/assignment/form/:formId", updateFormById);
+    app.put    ("/api/assignment/form/:formId", updateFormById);
     app.get    ("/api/assignment/form/:formId", findFormById);
     app.delete ("/api/user/:userId/form/:formId", deleteFormById);
     app.get    ("/api/user/:userId/form", findAllFormsForUser);
@@ -59,7 +59,6 @@ module.exports = function (app, formModel) {
     }
 
     function createFormForUser(req, res) {
-        console.log("Inside addding form server");
         var form = req.body;
         var userId = req.params.userId;
         formModel
@@ -83,12 +82,14 @@ module.exports = function (app, formModel) {
             )
     }
 
-    function updateUser (req, res) {
+    function updateFormById(req, res) {
         console.log("Inside User Server");
-        var formId = req.params.formId;
+        //var formId = req.params.formId;
+        //console.log(formId);
         var newForm = req.body;
+        var formId = newForm._id;
         formModel
-            .updateUser(formId, newForm)
+            .updateFormById(formId, newForm)
             .then(
                 function(stats) {
                     res.send(200);

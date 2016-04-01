@@ -32,6 +32,8 @@
         }
 
         function updateFormById(formId, newForm) {
+            console.log("client update"+newForm.title);
+            console.log("client update"+newForm._id);
             return $http.put("/api/assignment/form/"+formId, newForm);
         }
 
@@ -49,7 +51,8 @@
         }
 
         function findFormById(formId) {
-            return $http.get("/api/assignment/form/" + formId);
+            console.log("inside select client");
+            return $http.get("/api/assignment/form/" + formId, formId);
         }
 
         //function getAllForms() {

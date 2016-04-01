@@ -11,6 +11,7 @@ module.exports = function () {
         createFormForUser: createFormForUser,
         findAllFormsForUser: findAllFormsForUser,
         findFormById: findFormById,
+        updateFormById: updateFormById,
         removeForm: removeForm,
         getMongooseModel: getMongooseModel
     };
@@ -25,9 +26,9 @@ module.exports = function () {
     }
 
 
-    function findFormById (formId) {
+    function findFormById(formId) {
         //return Form.findById (formId);
-
+        console.log("inside select model");
         var deferred = q.defer();
         Form.findById(formId,
             function (err, form) {

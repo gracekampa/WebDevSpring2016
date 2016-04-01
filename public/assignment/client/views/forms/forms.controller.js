@@ -99,6 +99,7 @@
                         //$scope.form = response.data;
                         //vm.form = {title: form.title};
                         vm.form = form;
+                        vm.form.title = form.title;
                     },
                     function(err) {
                         vm.error = err;
