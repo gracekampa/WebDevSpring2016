@@ -9,8 +9,8 @@
             </ul>
 
             <table class="table table-responsive">
-                <tbody ng-model="model.fields"  as-sortable="model.sortableOptions">
-                <tr ng-switch="field.type" ng-repeat="field in model.fields" as-sortable-item="">
+                <tbody ng-model="model.fields">
+                <tr ng-switch="field.type" ng-repeat="field in model.fields">
                     <td ng-switch-when="TEXT">
                         <label>{{field.label}}</label>
                         <div class="input-group">
@@ -25,7 +25,7 @@
                                 <button ng-click="model.deleteField(field)" type="button" class="btn">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn handle" as-sortable-item-handle="">
+                                <button type="button" ng-mouseup="model.sort()" class="btn handle">
                                     <span class="glyphicon glyphicon-align-justify"></span>
                                 </button>
                             </div>
@@ -47,7 +47,7 @@
                                 <button ng-click="model.deleteField(field)" type="button" class="btn">
                                     <span class="glyphicon glyphicon-remove"></span>
                                 </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn handle" as-sortable-item-handle>
+                                <button type="button" ng-mouseup="model.sort()" class="btn handle">
                                     <span class="glyphicon glyphicon-align-justify"></span>
                                 </button>
                             </div>
