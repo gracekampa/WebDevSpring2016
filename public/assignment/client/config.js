@@ -48,7 +48,11 @@
             })
             .when("/form/:formId/fields", {
                 templateUrl: "views/forms/fields.view.html",
-                controller: "FieldsController"
+                controller: "FieldsController",
+                controllerAs: "model",
+                resolve: {
+                    checkLoggedIn: checkLoggedIn
+                }
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",

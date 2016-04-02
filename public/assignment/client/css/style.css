@@ -166,3 +166,8 @@ td > a {
     color: #B988C2;
     text-decoration: none;
 }
+
+/* sortable */
+.handle {
+    cursor: move;
+}

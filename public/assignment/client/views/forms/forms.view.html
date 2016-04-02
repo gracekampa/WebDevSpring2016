@@ -29,7 +29,12 @@
                 </thead>
                 <tbody>
                 <tr ng-repeat="form in model.forms">
-                    <td><a href="#/fields">{{form.title}}</a></td>
+                    <td>
+                        <a href="#/form/{{form._id}}/fields">
+                            {{form.title}}
+                        </a>
+                    </td>
+                    <!--<td><a href="#/fields">{{form.title}}</a></td>-->
                     <td>
                         <a ng-click="model.deleteForm(form)">
                             <span class="glyphicon glyphicon-remove"></span>

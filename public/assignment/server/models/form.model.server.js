@@ -22,7 +22,6 @@ module.exports = function () {
     }
 
     function removeForm(formId) {
-        //return Form.remove().where("_id").equals(formId);
         var deferred = q.defer();
         Form
             .remove (

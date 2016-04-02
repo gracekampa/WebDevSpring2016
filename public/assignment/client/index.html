@@ -2,10 +2,16 @@
 <html lang="en" ng-app="FormBuilderApp">
 <head>
     <meta charset="UTF-8">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-sortable/0.13.4/sortable.js"></script>
+    <script type="text/javascript" src="views/ng-sortable.js"></script>
+    <link rel="stylesheet" type="text/css" href="views/ng-sortable.min.css">
     <script src="app.js"></script>
     <script src="config.js"></script>
     <script src="views/main/main.controller.js"></script>
@@ -13,11 +19,13 @@
     <script src="views/sidebar/sidebar.controller.js"></script>
     <script src="views/forms/forms.controller.js"></script>
     <script src="views/forms/fields.controller.js"></script>
+    <script src="directives/fields-directives.js"></script>
     <script src="views/users/login.controller.js"></script>
     <script src="views/users/profile.controller.js"></script>
     <script src="views/users/register.controller.js"></script>
     <script src="services/user.service.client.js"></script>
     <script src="services/forms.service.client.js"></script>
+    <script src="services/fields.service.client.js"></script>
     <title></title>
 </head>
 <body ng-controller="MainController">
