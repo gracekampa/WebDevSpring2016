@@ -3,10 +3,10 @@
  */
 (function(){
     angular
-        .module("fieldsDirectives", [])
-        .directive("fieldsSortable", fieldsSortable);
+        .module("jgaDirectives", [])
+        .directive("jgaSortable", jgaSortable);
 
-    function fieldsSortable() {
+    function jgaSortable() {
         function link(scope, element, attrs) {
             var start = null;
             var end   = null;
@@ -23,11 +23,14 @@
                         if(start >= end) {
                             start--;
                         }
-                        scope.model.sortPage(start, end);
+                        scope.jgaSortableCallback({start: start, end: end});
                     }
                 });
         }
         return {
+            scope: {
+                jgaSortableCallback: '&'
+            },
             link: link
         };
     }

@@ -16,12 +16,28 @@ module.exports = function () {
         deleteField: deleteField,
         findField: findField,
         updateField: updateField,
-        findFieldsByFormId: findFieldsByFormId
+        findFieldsByFormId: findFieldsByFormId,
+        sortField: sortField
     };
     return api;
 
     function getMongooseModel() {
         return Field;
+    }
+
+    function sortField(formId, fieldId, startIndex, endIndex) {
+        return Form
+            .findById(formId)
+            .then(
+                function(form) {
+                    form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
+
+                    // notify mongoose 'pages' field changed
+                    form.markModified("fields");
+
+                    form.save();
+                }
+            );
     }
 
     function createField(formId, field) {

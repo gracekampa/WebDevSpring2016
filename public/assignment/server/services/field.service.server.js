@@ -82,5 +82,22 @@ module.exports = function (app, formModel, fieldModel) {
                     res.status(400).send(err);
                 }
             );
+
+        var fieldId = req.params.fieldId;
+        var startIndex = req.query.startIndex;
+        var endIndex = req.query.endIndex;
+
+        if (startIndex && endIndex) {
+            fieldModel
+                .sortField(formId, fieldId, startIndex, endIndex)
+                .then(
+                    function (stat) {
+                        return res.json(200);
+                    },
+                    function (err) {
+                        res.status(400).send(err);
+                    }
+                );
+        }
     }
 }
