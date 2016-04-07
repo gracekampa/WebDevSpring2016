@@ -1,0 +1,291 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+    padding-top: 50px;
+}
+
+p, h1, a {
+    font-family: 'Open Sans';
+    color: #14081F;
+}
+
+
+
+/*
+ * Global add-ons
+ */
+
+.center {
+    text-align: center;
+}
+
+.sub-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.page-header {
+    font-family: Lobster;
+    font-size: 35px;
+    border-bottom: none;
+}
+
+.button-movie {
+    height: 40px;
+    width: 70%;
+    color: white;
+    border-radius: 0;
+    background-color: #FF1C19;
+    border-bottom: solid 5px #7C0906;
+    margin: 10px 0px 40px 0px;
+}
+
+.review-button {
+    height: 40px;
+    width: 40%;
+    color: white;
+    border-radius: 0;
+    background-color: #FF1C19;
+    border-bottom: solid 5px #7C0906;
+    margin: 20px 20px 10px 20px;
+}
+
+.review-star {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.button-movie:hover {
+    background-color: #7C0906;
+    border-bottom: solid 5px #FF1C19;
+    color: white;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.nav > .active > a,
+.nav .active > a:hover,
+.nav > .active > a:focus {
+    color: #fff;
+    background-color: #FF1C19;
+}
+
+.navigation {
+    background-color: rgba(255,255,255,0.8);
+    z-index: 1;
+}
+
+.navigation a {
+    /*color: #ff4c05;*/
+    color: #FF1C19;
+}
+
+.navigation a:hover {
+    color: #14081F;
+}
+
+.navbar-fixed-top {
+    border: 0;
+}
+
+.navbar-brand {
+    font-family: 'Lobster';
+    font-size: 30px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: rgba(255,255,255,0.8);
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+    display: none;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 51px;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        display: block;
+        padding: 20px;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+        background-color: #ffffff;
+    }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+    margin-right: -21px; /* 20px padding + 1px border */
+    margin-bottom: 20px;
+    margin-left: -20px;
+}
+.nav-sidebar > li > a {
+    padding-right: 20px;
+    padding-left: 20px;
+    color: #FF1C19;
+}
+.nav-sidebar > .active > a,
+.nav-sidebar > .active > a:hover,
+.nav-sidebar > .active > a:focus {
+    color: #fff;
+    background-color: #FF1C19;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+    padding: 20px;
+}
+@media (min-width: 768px) {
+    .main {
+        padding-right: 40px;
+        padding-left: 40px;
+    }
+}
+.main .page-header {
+    margin-top: 0;
+}
+
+/*
+ * Home
+ */
+.welcome-header {
+    font-size: 50px;
+    font-family: 'Lobster';
+    text-align: center;
+    color: #FF1C19;
+}
+
+.welcome-text {
+    text-align: justify;
+}
+
+/*
+ * Register
+ */
+button > a, a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/*
+ * Profile
+ */
+.board {
+    background-color: whitesmoke;
+    box-shadow: 5px 5px 10px #888888;
+    height: 300px;
+    width: 250px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+.board-title {
+    color: #FF1C19;
+    font-family: 'Lobster';
+    text-align: center;
+    font-size: 20px;
+}
+
+.board-row {
+    height: 35px;
+    border-bottom: solid lightgray 1px;
+    padding-top: 6px;
+}
+
+
+/*
+ * Details
+ */
+
+.like-button {
+    font-size: 30px;
+}
+
+/*
+ * Forms and Fields
+ */
+
+.glyphicon:hover {
+    color: #FF1C19;
+}
+
+td > a, td > a:hover {
+    color: #303030;
+    text-decoration: none;
+}
+
+td > a:hover {
+    color: #FF1C19;
+}
+
+
+
+/*
+ * Forms and Fields
+ */
+th {
+    background-color: #ddd;
+}
+
+td {
+    border: 1px solid #ddd;
+}
+
+.fields-label {
+    display: block;
+}
+
+.form-control {
+    width: 70%;
+}
+
+.fields-form {
+    display: inline;
+}
+
+form {
+    padding: 10px;
+}
+
+td > a {
+    color: #14081F;
+}
+
+.nav > li > a, .nav > li > a:hover {
+    color: #FF1C19;
+    text-decoration: none;
+}
+
+.nav > li > a:hover {
+    color: #14081F;
+    text-decoration: none;
+}
+
+.thumb-poster {
+    height: 100px;
+}
+
+.details-poster {
+    height: 200px;
+    margin-right: 40px;
+}

@@ -59,6 +59,40 @@ module.exports = function(app, movieModel, userModel) {
             );
     }
 
+    //function profile(req, res) {
+    //    var userId = req.params.userId;
+    //    var user = null;
+    //
+    //    // use model to find user by id
+    //    userModel.findUserById(userId)
+    //        .then(
+    //            // first retrieve the user by user id
+    //            function(doc) {
+    //                user = doc;
+    //                // fetch courses this user likes
+    //                return movieModel.findMoviesByImdbIDs(doc.likes);
+    //            },
+    //            // reject promise if error
+    //            function(err) {
+    //                res.status(400).send(err);
+    //            }
+    //        )
+    //        .then(
+    //            // fetch movies this user likes
+    //            function(movies) {
+    //                // list of movies this user likes
+    //                // movies are not stored in database
+    //                // only added for UI rendering
+    //                user.likesMovies = movies;
+    //                res.json(user);
+    //            },
+    //            // send error if promise rejected
+    //            function(err) {
+    //                res.status(400).send(err);
+    //            }
+    //        );
+    //}
+
     function profile(req, res) {
         var userId = req.params.userId;
         var user = null;
@@ -66,32 +100,56 @@ module.exports = function(app, movieModel, userModel) {
         // use model to find user by id
         userModel.findUserById(userId)
             .then(
+
                 // first retrieve the user by user id
-                function(doc) {
+                function (doc) {
+
                     user = doc;
-                    // fetch courses this user likes
+
+                    // fetch movies this user likes
                     return movieModel.findMoviesByImdbIDs(doc.likes);
                 },
+
                 // reject promise if error
-                function(err) {
+                function (err) {
                     res.status(400).send(err);
                 }
             )
             .then(
                 // fetch movies this user likes
-                function(movies) {
+                function (movies) {
+
                     // list of movies this user likes
                     // movies are not stored in database
                     // only added for UI rendering
                     user.likesMovies = movies;
                     res.json(user);
                 },
+
                 // send error if promise rejected
-                function(err) {
+                function (err) {
                     res.status(400).send(err);
                 }
-            );
+            )
     }
+
+    //function updateUser (req, res) {
+    //    console.log("Inside User Server");
+    //    var username = req.params.username;
+    //    var user = req.body;
+    //    userModel
+    //        .updateUser(username, user)
+    //        .then (
+    //            function (doc) {
+    //                req.session.currentUser = doc;
+    //                res.json(doc);
+    //                res.send(200);
+    //            },
+    //            function (err) {
+    //                res.status(400).send(err);
+    //            }
+    //        );
+    //}
 
     function updateUser (req, res) {
         console.log("Inside User Server");
@@ -99,10 +157,8 @@ module.exports = function(app, movieModel, userModel) {
         var user = req.body;
         userModel
             .updateUser(username, user)
-            .then (
-                function (doc) {
-                    req.session.currentUser = doc;
-                    res.json(doc);
+            .then(
+                function(stats) {
                     res.send(200);
                 },
                 function (err) {

@@ -1,9 +1,4 @@
-/**
- * Created by OWNER on 3/22/2016.
- */
-module.exports = function() {
-
-    var mongoose = require("mongoose");
+module.exports = function(mongoose) {
 
     var MovieSchema = require("./movie.schema.server.js")(mongoose);
 
@@ -21,6 +16,6 @@ module.exports = function() {
         likesMovies: [MovieSchema],
         // collection property sets
         // collection name to 'user'
-    }, {collection: 'project.user'});
+    }, {collection: 'project.omdb.user'});
     return UserSchema;
 };

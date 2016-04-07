@@ -1,9 +1,6 @@
-/**
- * Created by OWNER on 3/22/2016.
- */
 (function(){
     angular
-        .module("MovieApp")
+        .module("OmdbApp")
         .factory("MovieService", movieService);
 
     function movieService($http) {
@@ -18,7 +15,6 @@
         }
 
         function userLikesMovie(userId, movie) {
-            //console.log(movie);
             return $http.post("/api/project/user/"+userId+"/movie/"+movie.imdbID, movie);
         }
     }

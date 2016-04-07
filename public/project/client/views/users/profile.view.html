@@ -25,6 +25,26 @@
                     <div class="board-row">The Proposal</div>
                 </div>
             </div>
+
+            <div ng-if="model.profile.likesMovies.length">
+
+                <h3>Movies I Like</h3>
+
+                <div class="panel panel-default jga-movie-panel"
+                     ng-repeat="movie in model.profile.likesMovies">
+                    <div class="panel-heading">
+                        <a href="#/details/{{movie.imdbID}}">
+                            {{movie.title}}
+                        </a>
+                    </div>
+                    <div class="panel-body">
+                        <a href="#/details/{{movie.imdbID}}">
+                            <img ng-src="{{movie.poster}}" width="100px"/>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 </div>

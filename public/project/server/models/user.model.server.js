@@ -28,32 +28,91 @@ module.exports = function(db, mongoose) {
     return api;
 
     // add movie to user likes
-    function userLikesMovie (userId, movie) {
+    //function userLikesMovie (userId, movie) {
+    //
+    //    var deferred = q.defer();
+    //
+    //    // find the user
+    //    UserModel.findById(userId, function (err, doc) {
+    //
+    //        // reject promise if error
+    //        if (err) {
+    //            deferred.reject(err);
+    //        } else {
+    //
+    //            // add movie id to user likes
+    //            doc.likes.push (movie.imdbID);
+    //
+    //            // save user
+    //            doc.save (function (err, doc) {
+    //
+    //                if (err) {
+    //                    deferred.reject(err);
+    //                } else {
+    //
+    //                    // resolve promise with user
+    //                    deferred.resolve (doc);
+    //                }
+    //            });
+    //        }
+    //    });
+    //
+    //    return deferred;
+    //}
 
+    function userLikesMovie (userId, movie) {
+        console.log("inside user likes movie");
         var deferred = q.defer();
 
         // find the user
+        //UserModel.findById(userId, function (err, doc) {
+        //
+        //    // reject promise if error
+        //    if (err) {
+        //        deferred.reject(err);
+        //    } else {
+        //        if (doc) {
+        //            // add movie id to user likes
+        //            doc.likes.push(movie.imdbID);
+        //
+        //            // save user
+        //            doc.save (function (err, doc) {
+        //
+        //                if (err) {
+        //                    deferred.reject(err);
+        //                } else {
+        //
+        //                    // resolve promise with user
+        //                    deferred.resolve(doc);
+        //                }
+        //            });
+        //        }
+        //
+
+
         UserModel.findById(userId, function (err, doc) {
 
             // reject promise if error
             if (err) {
                 deferred.reject(err);
             } else {
+                //if (doc) {
+                    // add movie id to user likes
+                    doc.likes.push(movie.imdbID);
 
-                // add movie id to user likes
-                doc.likes.push (movie.imdbID);
+                    // save user
+                    doc.save (function (err, doc) {
 
-                // save user
-                doc.save (function (err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
 
-                    if (err) {
-                        deferred.reject(err);
-                    } else {
+                            // resolve promise with user
+                            deferred.resolve(doc);
+                        }
+                    });
+                //}
 
-                        // resolve promise with user
-                        deferred.resolve (doc);
-                    }
-                });
             }
         });
 

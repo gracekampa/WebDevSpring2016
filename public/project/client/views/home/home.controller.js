@@ -8,7 +8,7 @@
 
     function HomeController($scope, OmdbService, $rootScope) {
 
-        $scope.newMovies = OmdbService.findNewestMovies();
+        //$scope.newMovies = OmdbService.findNewestMovies();
 
         var vm = this;
         //var imdbID = $routeParams.imdbID;
@@ -17,11 +17,11 @@
 
         function init() {
             console.log("In Home Controller");
-            OmdbService
-                .findNewestMovies()
-                .then(function(response){
-                    vm.data = response.data;
-                });
+            //OmdbService
+            //    .findNewestMovies()
+            //    .then(function(response){
+            //        vm.data = response.data;
+            //    });
         }
         init();
 

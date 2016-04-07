@@ -1,6 +1,3 @@
-/**
- * Created by OWNER on 3/22/2016.
- */
 module.exports = function(app, movieModel, userModel) {
     app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
     app.get("/api/project/movie/:imdbID/user", findUserLikes);
@@ -26,7 +23,6 @@ module.exports = function(app, movieModel, userModel) {
             )
             .then (
                 function (users) {
-                    console.log("user added to userLikes");
                     movie.userLikes = users;
                     res.json(movie);
                 },
@@ -41,9 +37,6 @@ module.exports = function(app, movieModel, userModel) {
         var userId = req.params.userId;
         var imdbID = req.params.imdbID;
         var movie;
-        //console.log("inside movie service");
-        //console.log(movieOmdb);
-        //console.log(userId);
 
         movieModel
             .userLikesMovie(userId, movieOmdb)

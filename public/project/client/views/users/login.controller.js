@@ -17,7 +17,8 @@
 
         function login(user) {
             console.log('Inside Login');
-            if(!user) {
+            if(!user || !user.username || !user.password) {
+                //$scope.message = "Please fill in the required fields.";
                 return;
             }
             //UserService
@@ -35,11 +36,15 @@
                     password: user.password
                 })
                 .then(function(response){
-                    if(response.data) {
-                        UserService.setCurrentUser(response.data);
-                        $location.url("/profile");
-                    }
-                });
+                        if(response.data) {
+                            UserService.setCurrentUser(response.data);
+                            $location.url("/profile");
+                        }
+                    },
+                    function(error) {
+                        //$scope.message = "Invalid credentials.";
+                        return;
+                    });
         }
     }
 })();

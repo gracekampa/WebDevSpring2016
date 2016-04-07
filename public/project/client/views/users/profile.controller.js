@@ -39,15 +39,19 @@
         function update(user) {
             UserService
                 .updateUser(user)
-                .then (
+                .then(
                     function(response) {
-                        vm.profile = response.data;
-                        vm.message = "User updated successfully";
-                        UserService.setCurrentUser($rootScope.currentUser);
+                        if (response.data) {
+                            vm.currentUser = response.data;
+                            $scope.message = "User updated successfully";
+                            //console.log(vm.message);
+                            //UserService.setCurrentUser(vm.currentUser);
+                        }
                     },
                     function (err) {
                         vm.error = err;
-                        vm.message = "Unable to update the user";
+                        $scope.error = "Unable to update the user";
+                        return;
                     }
                 );
         }
