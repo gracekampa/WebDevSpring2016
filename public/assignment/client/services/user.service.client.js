@@ -22,23 +22,23 @@
 
         function findUserByCredentials(credentials) {
             //return $http.post("/api/project/user", credentials);
-            return $http.get("/api/project/user", credentials);
+            return $http.get("/api/assignment/user", credentials);
         }
 
         function getProfile() {
-            return $http.get("/api/project/profile/"+$rootScope.currentUser._id);
+            return $http.get("/api/assignment/profile/"+$rootScope.currentUser._id);
         }
 
         function register(user) {
-            return $http.post("/api/project/register", user);
+            return $http.post("/api/assignment/register", user);
         }
 
         function logout() {
-            return $http.post("/api/project/logout");
+            return $http.post("/api/assignment/logout");
         }
 
         function getCurrentUser() {
-            return $http.get("/api/project/loggedin");
+            return $http.get("/api/assignment/loggedin");
         }
 
         function setCurrentUser(user) {
@@ -47,11 +47,11 @@
 
         function login(credentials) {
             console.log('Inside login client');
-            return $http.post("/api/project/login", credentials);
+            return $http.post("/api/assignment/login", credentials);
         }
 
         function updateUser (user) {
-            return $http.put("/api/project/user/"+user.username, user);
+            return $http.put("/api/assignment/user/"+user.username, user);
         }
     }
 })();

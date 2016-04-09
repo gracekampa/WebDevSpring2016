@@ -3,12 +3,12 @@
  */
 module.exports = function(app, userModel) {
 
-    app.post("/api/project/login", login);
-    app.get("/api/project/loggedin", loggedin);
-    app.post("/api/project/logout", logout);
-    app.post("/api/project/register", register);
-    app.get("/api/project/profile/:userId", profile);
-    app.put("/api/project/user/:username", updateUser);
+    app.post("/api/assignment/login", login);
+    app.get("/api/assignment/loggedin", loggedin);
+    app.post("/api/assignment/logout", logout);
+    app.post("/api/assignment/register", register);
+    app.get("/api/assignment/profile/:userId", profile);
+    app.put("/api/assignment/user/:username", updateUser);
 
 
     function login(req, res) {

@@ -21,6 +21,6 @@ module.exports = function() {
         likesMovies: [MovieSchema],
         // collection property sets
         // collection name to 'user'
-    }, {collection: 'project.user'});
+    }, {collection: 'project.omdb.user'});
     return UserSchema;
 };
