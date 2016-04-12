@@ -9,6 +9,7 @@
 
     function userService($http, $rootScope) {
         var api = {
+            findAllUsers: findAllUsers,
             findUserByCredentials: findUserByCredentials,
             login: login,
             setCurrentUser: setCurrentUser,
@@ -19,6 +20,10 @@
             updateUser: updateUser
         };
         return api;
+
+        function findAllUsers() {
+            return $http.get("/api/assignment/admin/user");
+        }
 
         function findUserByCredentials(credentials) {
             //return $http.post("/api/project/user", credentials);
@@ -51,7 +56,7 @@
         }
 
         function updateUser (user) {
-            return $http.put("/api/assignment/user/"+user.username, user);
+            return $http.put("/api/assignment/user/"+user._id, user);
         }
     }
 })();

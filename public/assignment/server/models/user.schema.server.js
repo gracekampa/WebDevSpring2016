@@ -11,6 +11,14 @@ module.exports = function() {
     var UserSchema = mongoose.Schema({
         username: String,
         password: String,
+        google:   {
+            id:    String,
+            token: String
+        },
+        facebook:   {
+            id:    String,
+            token: String
+        },
         firstName: String,
         lastName: String,
         email: [String],
