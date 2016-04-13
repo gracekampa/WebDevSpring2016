@@ -1,7 +1,7 @@
 /**
  * Created by OWNER on 2/23/2016.
  */
-(function(){
+(function() {
     angular
-        .module("FormBuilderApp", ["ngRoute"]);
+        .module("FormBuilderApp", ["ngRoute", "sortableDirective"]);
 })();

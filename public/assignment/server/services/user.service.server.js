@@ -11,11 +11,11 @@ module.exports = function(app, userModel) {
     app.post  ('/api/assignment/login', passport.authenticate('local'), login);
     app.post  ('/api/assignment/logout',         logout);
     app.post  ('/api/assignment/register',       register);
-    app.post  ('/api/assignment/user',     auth, createUser);
+    app.post  ('/api/assignment/admin/user',     auth, createUser);
     app.get   ('/api/assignment/loggedin',       loggedin);
     app.get   ('/api/assignment/admin/user',     auth, findAllUsers);
-    app.put   ('/api/assignment/user/:id', auth, updateUser);
-    app.delete('/api/user/assignment/:id', auth, deleteUser);
+    app.put   ('/api/assignment/admin/user/:id', auth, updateUser);
+    app.delete('/api/assignment/admin/user/:id', auth, deleteUser);
 
     //app.get   ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     //app.get('/auth/facebook/callback',
@@ -200,6 +200,7 @@ module.exports = function(app, userModel) {
     }
 
     function findAllUsers(req, res) {
+        console.log("inside admin user service");
         if(isAdmin(req.user)) {
             userModel
                 .findAllUsers()
@@ -317,7 +318,7 @@ module.exports = function(app, userModel) {
     }
 
     function isAdmin(user) {
-        if(user.roles.indexOf("admin") > 0) {
+        if(user.roles.indexOf("admin") != -1) {
             return true
         }
         return false;

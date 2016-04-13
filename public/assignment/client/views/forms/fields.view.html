@@ -8,47 +8,21 @@
                 <li role="presentation" class="active"><a href="#fields">Fields</a></li>
             </ul>
 
-            <table class="table table-responsive">
-                <tbody ng-model="model.fields">
+            <table class="table table-responsive" id="sort">
+                <tbody ng-model="model.fields" ng-model="model.fields" fields-sortable fields-sortable-callback="model.sortField(start, end)">
                 <tr ng-switch="field.type" ng-repeat="field in model.fields">
                     <td ng-switch-when="TEXT">
                         <label>{{field.label}}</label>
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="{{field.placeholder}}">
-                            <div class="input-group-btn">
-                                <button ng-click="model.editField(field)" type="button" class="btn btn-default" data-toggle="modal" data-target="#editField">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button> -->
-                                <button ng-click="model.deleteField(field)" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn btn-default handle">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                            </div>
+                            <div class="input-group-btn" ng-include="'views/forms/field-buttons.html'"></div>
                         </div>
                     </td>
                     <td ng-switch-when="TEXTAREA">
                         <label>{{field.label}}</label>
                         <div class="input-group">
                             <textarea class="form-control" placeholder="{{field.placeholder}}"></textarea>
-                            <div class="input-group-btn">
-                                <button ng-click="model.editField(field)" type="button" class="btn btn-default" data-toggle="modal" data-target="#editField">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button> -->
-                                <button ng-click="model.deleteField(field)" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn btn-default myHandle">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                            </div>
+                            <div class="input-group-btn" ng-include="'views/forms/field-buttons.html'"></div>
                         </div>
                     </td>
                     <td ng-switch-when="OPTIONS">
@@ -57,20 +31,7 @@
                             <select class="form-control">
                                 <option ng-repeat="option in field.options">{{option.label}}</option>
                             </select>
-                            <div class="input-group-btn">
-                                <button ng-click="model.editField(field)" type="button" class="btn btn-default" data-toggle="modal" data-target="#editField">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button> -->
-                                <button ng-click="model.deleteField(field)" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn btn-default handle">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                            </div>
+                            <div class="input-group-btn" ng-include="'views/forms/field-buttons.html'"></div>
                         </div>
                     </td>
                     <td ng-switch-when="CHECKBOXES">
@@ -84,20 +45,7 @@
                                     <br>
                                 </div>
                             </div>
-                            <div class="input-group-btn">
-                                <button ng-click="model.editField(field)" type="button" class="btn btn-default" data-toggle="modal" data-target="#editField">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button> -->
-                                <button ng-click="model.deleteField(field)" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn btn-default handle">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                            </div>
+                            <div class="input-group-btn" ng-include="'views/forms/field-buttons.html'"></div>
                         </div>
                     </td>
                     <td ng-switch-when="RADIOS">
@@ -108,40 +56,14 @@
                                     <input type="radio" name="{{option.label}}" value="{{option.value}}" checked> {{option.label}}
                                 </label>
                             </div>
-                            <div class="input-group-btn">
-                                <button ng-click="model.editField(field)" type="button" class="btn btn-default" data-toggle="modal" data-target="#editField">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button> -->
-                                <button ng-click="model.deleteField(field)" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn btn-default handle">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                            </div>
+                            <div class="input-group-btn" ng-include="'views/forms/field-buttons.html'"></div>
                         </div>
                     </td>
                     <td ng-switch-default>
                         <label>{{field.label}}</label>
                         <div class="input-group">
                             <input type="date" placeholder="{{field.placeholder}}" class="form-control">
-                            <div class="input-group-btn">
-                                <button ng-click="model.editField(field)" type="button" class="btn btn-default" data-toggle="modal" data-target="#editField">
-                                    <span class="glyphicon glyphicon-pencil"></span>
-                                </button>
-                                <!-- <button type="button" class="btn btn-default">
-                                <span class="glyphicon glyphicon-plus"></span>
-                            </button> -->
-                                <button ng-click="model.deleteField(field)" type="button" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
-                                </button>
-                                <button type="button" ng-mouseup="model.sort()" class="btn btn-default handle">
-                                    <span class="glyphicon glyphicon-align-justify"></span>
-                                </button>
-                            </div>
+                            <div class="input-group-btn" ng-include="'views/forms/field-buttons.html'"></div>
                         </div>
                     </td>
                     <br>

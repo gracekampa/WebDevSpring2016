@@ -8,6 +8,7 @@ module.exports = function (app, formModel, fieldModel) {
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldById);
     app.post("/api/assignment/form/:formId/field", addFieldToForm);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldById);
+    app.put("/api/assignment/form/:formId/startIndex/:startIndex/endIndex/:endIndex", sortField);
 
     function fieldsForFormId(req, res) {
         var formId = req.params.formId;
@@ -83,18 +84,38 @@ module.exports = function (app, formModel, fieldModel) {
                 }
             );
 
-        var fieldId = req.params.fieldId;
-        var startIndex = req.query.startIndex;
-        var endIndex = req.query.endIndex;
+        //var fieldId = req.params.fieldId;
+        //var startIndex = req.query.startIndex;
+        //var endIndex = req.query.endIndex;
+        //
+        //if (startIndex && endIndex) {
+        //    fieldModel
+        //        .sortField(formId, fieldId, startIndex, endIndex)
+        //        .then(
+        //            function (stat) {
+        //                return res.json(200);
+        //            },
+        //            function (err) {
+        //                res.status(400).send(err);
+        //            }
+        //        );
+    }
+
+    function sortField(req, res) {
+        var formId = req.params.formId;
+        var startIndex = req.params.startIndex;
+        var endIndex = req.params.endIndex;
+
+        // console.log("SERVER ", formId, startIndex, endIndex);
 
         if (startIndex && endIndex) {
             fieldModel
-                .sortField(formId, fieldId, startIndex, endIndex)
+                .sortField(formId, startIndex, endIndex)
                 .then(
-                    function (stat) {
+                    function(stat) {
                         return res.json(200);
                     },
-                    function (err) {
+                    function(err) {
                         res.status(400).send(err);
                     }
                 );

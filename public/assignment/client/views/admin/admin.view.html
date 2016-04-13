@@ -15,24 +15,24 @@
                     <th><span class="glyphicon glyphicon-triangle-bottom"></span> Action</th>
                 </tr>
                 <tr>
-                    <td><input ng-model="model.user.username" class="form-control" type="text" name="username" placeholder="username"/></td>
-                    <td><input ng-model="model.user.password" class="form-control" type="password" name="password" placeholder="password"/></td>
-                    <td><input ng-model="model.user.firstName" class="form-control" type="text" name="firstName" placeholder="first name"/></td>
-                    <td><input ng-model="model.user.lastName" class="form-control" type="password" name="lastName" placeholder="last name"/></td>
-                    <td><input ng-model="model.user.role" class="form-control" type="text" name="role" placeholder="role1, role2"/></td>
+                    <td><input ng-model="user.username" class="form-control" type="text" name="username" placeholder="username"/></td>
+                    <td><input ng-model="user.password" class="form-control" type="password" name="password" placeholder="password"/></td>
+                    <td><input ng-model="user.firstName" class="form-control" type="text" name="firstName" placeholder="first name"/></td>
+                    <td><input ng-model="user.lastName" class="form-control" type="text" name="lastName" placeholder="last name"/></td>
+                    <td><input ng-model="user.role" class="form-control" type="text" name="role" placeholder="role1, role2"/></td>
                     </td>
                     <td>
-                        <a ng-click="model.addUser(model.user)">
+                        <a ng-click="addUser(user)">
                             <scan class="glyphicon glyphicon-plus"></scan>
                         </a>
-                        <a ng-click="model.updateUser(model.user)">
+                        <a ng-click="updateUser(user)">
                             <scan class="glyphicon glyphicon-ok"></scan>
                         </a>
                     </td>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="user in model.users">
+                <tr ng-repeat="user in users">
                     <td>{{user.username}}</td>
                     <td> </td>
                     <td>{{user.firstName}}</td>
@@ -40,16 +40,17 @@
                     <td>{{user.role}}</td>
                     <!--<td><a href="#/fields">{{form.title}}</a></td>-->
                     <td>
-                        <a ng-click="model.deleteUser(user)">
+                        <a ng-click="removeUser(user)">
                             <span class="glyphicon glyphicon-remove"></span>
                         </a>
-                        <a ng-click="model.selectUser(user)">
+                        <a ng-click="selectUser(user)">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
                     </td>
                 </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

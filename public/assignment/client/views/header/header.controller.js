@@ -16,7 +16,7 @@
             vm.$location = $location;
         }
         init();
-        
+
         function logout()
         {
             UserService

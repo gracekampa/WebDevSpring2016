@@ -25,15 +25,16 @@ module.exports = function () {
         return Field;
     }
 
-    function sortField(formId, fieldId, startIndex, endIndex) {
+    function sortField(formId, startIndex, endIndex) {
+
         return Form
             .findById(formId)
             .then(
                 function(form) {
+
                     form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
 
-                    // notify mongoose 'pages' field changed
-                    form.markModified("fields");
+                    form.markModified("fields"); // notify mongoose fields have changed
 
                     form.save();
                 }
