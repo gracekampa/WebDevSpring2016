@@ -7,10 +7,18 @@
         .controller("AdminController", adminController);
 
     function adminController(UserService, $location, $scope) {
+        var vm = this;
         $scope.removeUser = removeUser;
         $scope.updateUser = updateUser;
         $scope.addUser    = addUser;
         $scope.selectUser = selectUser;
+
+        $scope.predicate = 'username';
+        $scope.reverse = true;
+        $scope.order = function(predicate) {
+            $scope.reverse = ($scope.predicate === predicate) ? !$scope.reverse : false;
+            $scope.predicate = predicate;
+        }
 
         function init() {
             UserService
@@ -42,7 +50,24 @@
 
         function selectUser(user)
         {
-            $scope.user = angular.copy(user);
+            //$scope.user = angular.copy(user);
+            UserService
+                .findUserById(user._id)
+                .then(
+                    function(response) {
+                        //$scope.form = response.data;
+                        //vm.form = {title: form.title};
+                        vm.user = user;
+                        vm.user.username = user.username;
+                        vm.user.password = user.password;
+                        vm.user.firstName = user.firstName;
+                        vm.user.lastName = user.lastName;
+                        vm.user.role = user.role;
+                    },
+                    function(err) {
+                        vm.error = err;
+                    }
+                );
         }
 
         function handleSuccess(response) {
@@ -52,33 +77,5 @@
         function handleError(error) {
             $scope.error = error;
         }
-
-        //var vm = this;
-        //
-        //vm.createUser = createUser;
-        //
-        //function init() {
-        //    UserService
-        //        .findAllUsers()
-        //        .then(
-        //            function(response) {
-        //                if (response.data) {
-        //                    vm.users = response.data;
-        //                }
-        //            });
-        //}
-        //init();
-        //
-        //function createUser(user) {
-        //    UserService
-        //        .register(user)
-        //        .then(function(response){
-        //            var currentUser = response.data;
-        //            if(currentUser != null) {
-        //                UserService.setCurrentUser(currentUser);
-        //                $location.url("/profile");
-        //            }
-        //        });
-        //}
     }
 })();

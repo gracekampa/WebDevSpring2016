@@ -172,31 +172,17 @@ td > a {
     cursor: move;
 }
 
-.jga-widget-list-tools {
-    position: absolute;
-    right: 15px;
-    background-color: white;
-    padding-left: 5px;
-    padding-bottom: 5px;
-    border-bottom-left-radius: 5px;
-}
-
-.jga-widget {
-    margin-bottom: 5px;
-}
-
-.jga-nowrap {
-    white-space:nowrap;
-}
-
-.jga-bg-highlight-on-hover:hover {
-    background-color: #f5f5f5;
-}
-
-.jga-highlight-on-hover:hover {
-    box-shadow: 0px 0px 1px #aaa;
-}
-
 .optionsBox {
     display: none;
+}
+
+.sortorder:after {
+    content: '\25b2';
+}
+.sortorder.reverse:after {
+    content: '\25bc';
+}
+
+.admin-table a {
+    color: #2e2e2e;
 }
