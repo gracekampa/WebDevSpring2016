@@ -59,7 +59,7 @@
             value: "RADIOS"
         }];
 
-        // if field type selected is dropdown, checboxes, or radio buttons, show options box
+        // if field type selected is dropdown, checkboxes, or radio buttons, show options box
         $('#newFieldType').on('change', function() {
             if ($(this).children(':selected').hasClass('needsOptionsBox')) {
                 $('.optionsBox').css('display', 'block');

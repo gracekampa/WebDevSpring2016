@@ -30,7 +30,7 @@ module.exports = function () {
         return Form
             .findById(formId)
             .then(
-                function(form) {
+                function (form) {
 
                     form.fields.splice(endIndex, 0, form.fields.splice(startIndex, 1)[0]);
 
@@ -38,8 +38,16 @@ module.exports = function () {
 
                     form.save();
                 }
-            );
-    }
+            )
+            .then(
+                function (form) {
+
+                },
+                function (err) {
+
+                }
+            )
+    };
 
     function createField(formId, field) {
         var deferred = q.defer();
