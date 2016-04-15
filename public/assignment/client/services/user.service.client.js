@@ -20,6 +20,7 @@
             getProfile: getProfile,
             deleteUser: deleteUser,
             updateUser: updateUser,
+            updateUserAdmin: updateUserAdmin,
             createUser: createUser
         };
         return api;
@@ -62,8 +63,13 @@
             return $http.post("/api/assignment/login", credentials);
         }
 
-        function updateUser (user) {
-            return $http.put("/api/assignment/admin/user/"+user._id, user);
+        function updateUser(user) {
+            return $http.put("/api/assignment/user/"+user.username, user);
+        }
+
+        function updateUserAdmin(userId, user) {
+            console.log(user);
+            return $http.put("/api/assignment/admin/user/"+userId, user);
         }
 
         function createUser(user) {

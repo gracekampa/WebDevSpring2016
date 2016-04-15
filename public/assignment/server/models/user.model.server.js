@@ -25,6 +25,7 @@ module.exports = function(db, mongoose) {
         //findUsersByIds: findUsersByIds,
         findUserByUsername: findUserByUsername,
         updateUser: updateUser,
+        updateUserAdmin: updateUserAdmin,
         removeUser: removeUser,
         //findUserByGoogleId: findUserByGoogleId,
         //findUserByFacebookId: findUserByFacebookId,
@@ -40,7 +41,7 @@ module.exports = function(db, mongoose) {
         return UserModel.findOne({'google.id': googleId});
     }
 
-    function updateUser(userId, user) {
+    function updateUserAdmin(userId, user) {
         return UserModel.update({_id: userId}, {$set: user});
     }
 
@@ -169,20 +170,20 @@ module.exports = function(db, mongoose) {
     //    return deferred.promise;
     //}
     //
-    //function updateUser (username, user) {
-    //    var deferred = q.defer();
-    //    UserModel
-    //        .update (
-    //            {username: username},
-    //            {$set: user},
-    //            function (err, stats) {
-    //                if (!err) {
-    //                    deferred.resolve(stats);
-    //                } else {
-    //                    deferred.reject(err);
-    //                }
-    //            }
-    //        );
-    //    return deferred.promise;
-    //}
+    function updateUser (username, user) {
+        var deferred = q.defer();
+        UserModel
+            .update (
+                {username: username},
+                {$set: user},
+                function (err, stats) {
+                    if (!err) {
+                        deferred.resolve(stats);
+                    } else {
+                        deferred.reject(err);
+                    }
+                }
+            );
+        return deferred.promise;
+    }
 }

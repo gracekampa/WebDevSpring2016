@@ -15,7 +15,8 @@ module.exports = function(app, userModel) {
     app.get   ('/api/assignment/loggedin',       loggedin);
     app.get   ('/api/assignment/admin/user',     auth, findAllUsers);
     app.get   ("/api/assignment/admin/user/:userId", findUserById);
-    app.put   ('/api/assignment/admin/user/:id', auth, updateUser);
+    app.put   ('/api/assignment/user/:username', updateUser);
+    app.put   ('/api/assignment/admin/user/:id', auth, updateUserAdmin);
     app.delete('/api/assignment/admin/user/:id', auth, deleteUser);
 
     //app.get   ('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
@@ -258,7 +259,23 @@ module.exports = function(app, userModel) {
         }
     }
 
-    function updateUser(req, res) {
+    function updateUser (req, res) {
+        console.log("Inside User Server");
+        var username = req.params.username;
+        var user = req.body;
+        userModel
+            .updateUser(username, user)
+            .then(
+                function(stats) {
+                    res.send(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
+
+    function updateUserAdmin(req, res) {
         var newUser = req.body;
         if(!isAdmin(req.user)) {
             delete newUser.roles;
@@ -268,7 +285,7 @@ module.exports = function(app, userModel) {
         }
 
         userModel
-            .updateUser(req.params.id, newUser)
+            .updateUserAdmin(req.params.id, newUser)
             .then(
                 function(user){
                     return userModel.findAllUsers();
