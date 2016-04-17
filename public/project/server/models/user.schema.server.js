@@ -20,7 +20,9 @@ module.exports = function() {
         likes: [String],
         // movies this user likes
         likesMovies: [MovieSchema],
-        reviewsMovies: [MovieSchema],
+        reviewsMovies: [{review: String},
+                        {rating: String},
+                        {movie: [MovieSchema]}],
         boards: [BoardSchema]
         // collection property sets
         // collection name to 'user'

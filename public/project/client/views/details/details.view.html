@@ -35,13 +35,19 @@
     </div>
 
     <h2 class="page-header">Reviews</h2>
-    <input ng-model="title" class="form-control" placeholder="Write your review"/>
-    <span class="glyphicon glyphicon-star-empty review-star"></span>
-    <span class="glyphicon glyphicon-star-empty review-star"></span>
-    <span class="glyphicon glyphicon-star-empty review-star"></span>
-    <span class="glyphicon glyphicon-star-empty review-star"></span>
-    <span class="glyphicon glyphicon-star-empty review-star"></span>
-    <button ng-click="model.addReview(model.data)" class="btn review-button">
+    <textarea ng-model="model.review" class="form-control" placeholder="Write your review"></textarea>
+    <span ng-init="rating = star.rating + 1"></span>
+    {{model.rating}}
+    <span class="star-rating" star-rating rating-value="rating"
+             data-max="5" on-rating-selected="rateMovie(rating)">
+    </span>
+
+    <!--<span class="glyphicon glyphicon-star-empty review-star"></span>-->
+    <!--<span class="glyphicon glyphicon-star-empty review-star"></span>-->
+    <!--<span class="glyphicon glyphicon-star-empty review-star"></span>-->
+    <!--<span class="glyphicon glyphicon-star-empty review-star"></span>-->
+    <!--<span class="glyphicon glyphicon-star-empty review-star"></span>-->
+    <button ng-click="model.addReview(model.movie, model.review, model.rating)" class="btn review-button">
         SUBMIT
     </button>
 

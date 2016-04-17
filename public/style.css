@@ -102,7 +102,7 @@ h1 {
     color: #B988C2;
 }
 
-.project-link:active {
+.project-link:active, .project-link:focus {
     text-decoration: none;
     color: white;
 }

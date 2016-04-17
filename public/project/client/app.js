@@ -3,5 +3,5 @@
  */
 (function(){
     angular
-        .module("MovieApp", ["ngRoute"]);
+        .module("MovieApp", ["ngRoute", "ratingStarDirective"]);
 })();

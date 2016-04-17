@@ -4,7 +4,8 @@
 (function(){
     angular
         .module("MovieApp")
-        .controller("DetailsController", detailsController);
+        .controller("DetailsController", detailsController)
+        .directive('starRating', starRating);
 
     function detailsController($routeParams, OmdbService, $rootScope, $location, MovieService, BoardService, $scope) {
         //$scope.imdbID = $routeParams.imdbID;
@@ -18,8 +19,17 @@
         var vm = this;
         var imdbID = $routeParams.imdbID;
         var currentUser = $rootScope.currentUser;
+        $scope.rating = 1;
+        vm.rating = 1;
+        vm.review = "";
+        $scope.rateMovie = function(rating) {
+            alert('Rating selected - ' + rating);
+            vm.rating = rating;
+        };
+
         vm.favorite = favorite;
         vm.addToBoard = addToBoard;
+        vm.addReview = addReview;
 
         $scope.boardOptions = [];
 
@@ -99,5 +109,63 @@
                 .then(init);
 
         }
+
+        function addReview(movie, review, rating) {
+            vm.review = review;
+            vm.rating = rating;
+            var movie = movie;
+            console.log(review);
+            console.log(rating);
+            console.log(movie.title);
+            var movieReview = [{review: review}, {rating: rating}, {movie: movie}];
+            var user = currentUser;
+            //console.log(movieReview);
+
+            MovieService
+                .userAddsReview(movieReview, user.username)
+                .then(init);
+
+        }
+    }
+
+    function starRating() {
+        return {
+            restrict: 'A',
+            template: '<ul class="rating">'
+            + '	<li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">'
+            + '\u2605'
+            + '</li>'
+            + '</ul>',
+            scope: {
+                ratingValue: '=',
+                max: '=',
+                onRatingSelected: '&'
+            },
+            link: function (scope, elem, attrs) {
+                var updateStars = function () {
+                    scope.stars = [];
+                    for (var i = 0; i < scope.max; i++) {
+                        scope.stars.push({
+                            filled: i < scope.ratingValue
+                        });
+                    }
+                };
+
+                scope.toggle = function (index) {
+                    scope.ratingValue = index + 1;
+                    scope.onRatingSelected({
+                        rating: index + 1
+                    });
+                };
+
+                scope.$watch('ratingValue',
+                    function (oldVal, newVal) {
+                        if (newVal) {
+                            updateStars();
+                        }
+                    }
+                );
+            }
+        };
     }
 })();

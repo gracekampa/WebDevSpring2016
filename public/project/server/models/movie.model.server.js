@@ -18,9 +18,122 @@ module.exports = function(db) {
         findMovieByImdbID: findMovieByImdbID,
         findMoviesByImdbIDs: findMoviesByImdbIDs,
         createMovie: createMovie,
-        userLikesMovie: userLikesMovie
+        userLikesMovie: userLikesMovie,
+        userAddsReview: userAddsReview
     };
     return api;
+
+    function userAddsReview(username, movieReview) {
+        var movie = movieReview[2].movie;
+        var review = [
+            {username: username},
+            {review: movieReview[0].review},
+            {rating: movieReview[1].rating.toString()}
+        ];
+        console.log(review);
+        var deferred = q.defer();
+
+        //Movie.findOneAndUpdate({imdbID: movie.imdbID}, { $push: { userReviews: review },
+        //
+        //)
+
+        Movie.findOneAndUpdate({imdbID: movie.imdbID}, { $push: { userReviews: review }},
+
+            function (err, doc) {
+
+                // reject promise if error
+                if (err) {
+                    deferred.reject(err);
+                }
+
+                // if there's a movie
+                if (doc) {
+                    // add user to likes
+                    doc.userReviews.push([
+                        {username: username},
+                        {review: movieReview[0].review},
+                        {rating: movieReview[1].rating.toString()}
+                    ]);
+                    // save changes
+                    doc.save(function(err, doc){
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                } else {
+                    // if there's no movie
+                    // create a new instance
+                    movie = new Movie({
+                        imdbID: movie.imdbID,
+                        title: movie.Title,
+                        poster: movie.Poster,
+                        userReviews: []
+                    });
+                    // add user to likes
+                    movie.userReviews.push(review);
+                    // save new instance
+                    movie.save(function(err, doc) {
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+
+        // find the movie by imdb ID
+        //Movie.findOne({imdbID: movie.imdbID},
+        //
+        //    function (err, doc) {
+        //
+        //        // reject promise if error
+        //        if (err) {
+        //            deferred.reject(err);
+        //        }
+        //
+        //        // if there's a movie
+        //        if (doc) {
+        //            // add user to likes
+        //            doc.userReviews.push([
+        //                {username: username},
+        //                {review: movieReview[0].review},
+        //                {rating: movieReview[1].rating.toString()}
+        //            ]);
+        //            // save changes
+        //            doc.save(function(err, doc){
+        //                if (err) {
+        //                    deferred.reject(err);
+        //                } else {
+        //                    deferred.resolve(doc);
+        //                }
+        //            });
+        //        } else {
+        //            // if there's no movie
+        //            // create a new instance
+        //            movie = new Movie({
+        //                imdbID: movie.imdbID,
+        //                title: movie.Title,
+        //                poster: movie.Poster,
+        //                userReviews: []
+        //            });
+        //            // add user to likes
+        //            movie.userReviews.push(review);
+        //            // save new instance
+        //            movie.save(function(err, doc) {
+        //                if (err) {
+        //                    deferred.reject(err);
+        //                } else {
+        //                    deferred.resolve(doc);
+        //                }
+        //            });
+        //        }
+        //    });
+
+        return deferred.promise;
+    }
 
     function userLikesMovie (userId, movie) {
 
