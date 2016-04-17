@@ -30,6 +30,9 @@ module.exports = function(db) {
             {review: movieReview[0].review},
             {rating: movieReview[1].rating.toString()}
         ];
+        review.username = username;
+        review.review = movieReview[0].review;
+        review.rating = movieReview[1].rating;
         console.log(review);
         var deferred = q.defer();
 
@@ -37,52 +40,31 @@ module.exports = function(db) {
         //
         //)
 
-        Movie.findOneAndUpdate({imdbID: movie.imdbID}, { $push: { userReviews: review }},
+        //Movie.update({imdbID: movie.imdbID}, { $push: { userReviews: review }});
 
-            function (err, doc) {
+        Movie.findByIdAndUpdate(movie._id, {$push: { "userReviews": [
+                            {username: review.username,
+                             review: review.review,
+                             rating: review.rating}
+                                    ]
+                    }}, {new: true}, function (err, doc) {
+            if (err) {
+                deferred.reject(err);
+            }
+            else {
+                deferred.resolve(doc)
+            }
+        });
 
-                // reject promise if error
-                if (err) {
-                    deferred.reject(err);
-                }
-
-                // if there's a movie
-                if (doc) {
-                    // add user to likes
-                    doc.userReviews.push([
-                        {username: username},
-                        {review: movieReview[0].review},
-                        {rating: movieReview[1].rating.toString()}
-                    ]);
-                    // save changes
-                    doc.save(function(err, doc){
-                        if (err) {
-                            deferred.reject(err);
-                        } else {
-                            deferred.resolve(doc);
-                        }
-                    });
-                } else {
-                    // if there's no movie
-                    // create a new instance
-                    movie = new Movie({
-                        imdbID: movie.imdbID,
-                        title: movie.Title,
-                        poster: movie.Poster,
-                        userReviews: []
-                    });
-                    // add user to likes
-                    movie.userReviews.push(review);
-                    // save new instance
-                    movie.save(function(err, doc) {
-                        if (err) {
-                            deferred.reject(err);
-                        } else {
-                            deferred.resolve(doc);
-                        }
-                    });
-                }
-            });
+        //Movie.update({imdbID: movie.imdbID},
+        //    { $push:
+        //        { userReviews: [
+        //                {username: username},
+        //                {review: movieReview[0].review},
+        //                {rating: movieReview[1].rating}
+        //                        ]
+        //        }
+        //    });
 
         // find the movie by imdb ID
         //Movie.findOne({imdbID: movie.imdbID},

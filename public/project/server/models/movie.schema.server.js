@@ -16,9 +16,9 @@ module.exports = function() {
             {username: String}
         ],
         userReviews: [
-            {username: String},
-            {review: String},
-            {rating: String}
+            {username: String,
+             review: String,
+             rating: String}
         ]
         // store movie documents in this collection
     }, {collection: 'project.omdb.movie'});

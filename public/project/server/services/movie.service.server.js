@@ -27,7 +27,7 @@ module.exports = function(app, movieModel, userModel) {
             )
             .then (
                 function (users) {
-                    console.log("user added to userLikes");
+                    //console.log("user added to userLikes");
                     movie.userLikes = users;
                     res.json(movie);
                 },

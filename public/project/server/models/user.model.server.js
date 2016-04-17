@@ -61,7 +61,7 @@ module.exports = function(db, mongoose) {
     //}
 
     function userLikesMovie (userId, movie) {
-        console.log("inside user likes movie");
+        //console.log("inside user likes movie");
         var deferred = q.defer();
 
         // find the user
@@ -172,7 +172,7 @@ module.exports = function(db, mongoose) {
     }
 
     function findUserByCredentials(credentials) {
-        console.log(credentials);
+        //console.log(credentials);
         var deferred = q.defer();
 
         // find one retrieves one document
