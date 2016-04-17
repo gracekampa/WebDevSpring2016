@@ -6,7 +6,7 @@
         .module("MovieApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, UserService, $location, $rootScope, $routeParams) {
+    function ProfileController($scope, UserService, MovieService, BoardService, $location, $rootScope, $routeParams) {
 
         //$scope.error = null;
         //$scope.message = null;
@@ -22,6 +22,9 @@
         vm.error = null;
         vm.message = null;
         vm.update = update;
+        vm.addBoard = addBoard;
+
+
 
         var username = $rootScope.currentUser.username;
         console.log(username);
@@ -33,6 +36,25 @@
                     vm.profile = response.data;
                     console.log(vm.profile);
                 });
+
+            BoardService
+                .findAllBoardsForUser($rootScope.currentUser._id)
+                .then(
+                    function(response) {
+                        if (response.data) {
+                            vm.boards = response.data;
+                            console.log(vm.boards);
+                        }
+                    });
+
+            //MovieService
+            //    .findAllBoardsForUser(vm.currentUser._id)
+            //    .then(
+            //        function(response) {
+            //            if (response.data) {
+            //                vm.boards = response.data;
+            //            }
+            //        });
         }
         return init();
 
@@ -52,6 +74,20 @@
                         vm.error = err;
                         $scope.error = "Unable to update the user";
                         return;
+                    }
+                );
+        }
+
+        function addBoard(board) {
+            var user = $rootScope.currentUser;
+            BoardService
+                .createBoardForUser(board, user)
+                .then (
+                    function(response) {
+                        vm.forms = response.data;
+                    },
+                    function(err) {
+                        vm.error = err;
                     }
                 );
         }
