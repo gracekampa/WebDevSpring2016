@@ -21,6 +21,10 @@ h1 {
     text-align: center;
 }
 
+.title > a {
+    color: #CFD1D2;
+}
+
 .navigation {
     background-color: whitesmoke;
     width: 100%;
@@ -66,6 +70,22 @@ h1 {
 
 .about-me > a {
     color: #9FA3A5;
+}
+
+.about-me-text {
+    text-align: center;
+    color: #CFD1D2;
+    font-size: 20px;
+}
+
+.circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    background-color: #CFD1D2;
+    margin: 0 auto;
+    background: url('images/grace_kampa.png') no-repeat center bottom;
+    background-size: contain;
 }
 
 .assignments {
