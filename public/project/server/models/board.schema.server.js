@@ -10,7 +10,8 @@ module.exports = function() {
         userId: String,
         title: String,
         type: String,
-        movies: [MovieSchema]
+        movies: [MovieSchema],
+        moviesTest: [{title: String, imdbID: String}]
         // store movie documents in this collection
     }, {collection: 'project.board'});
 

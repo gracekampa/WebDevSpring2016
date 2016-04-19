@@ -43,7 +43,7 @@
                     function(response) {
                         if (response.data) {
                             vm.boards = response.data;
-                            //console.log(vm.boards[0].movies);
+                            console.log(vm.boards);
                         }
                     });
 

@@ -7,6 +7,9 @@ module.exports = function (db, mongoose) {
     var BoardSchema = require("./board.schema.server.js")();
     var Board = mongoose.model("Board", BoardSchema);
 
+    var MovieSchema = require("./movie.schema.server.js")();
+    var Movie = mongoose.model("MovieBoard", MovieSchema);
+
     var api = {
         createBoardForUser: createBoardForUser,
         findAllBoardsForUser: findAllBoardsForUser,
@@ -89,14 +92,49 @@ module.exports = function (db, mongoose) {
         var deferred = q.defer();
         //var boardId = Board.find({title: boardTitle}, {userId: userId});
 
-        Board.findOneAndUpdate({title: boardTitle}, {$push: {"movies": movie}}, {new: true}, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            }
-            else {
-                deferred.resolve(doc)
-            }
-        });
+        Board.findOne({title: boardTitle},
+
+            function (err, doc) {
+
+                // reject promise if error
+                if (err) {
+                    deferred.reject(err);
+                }
+
+                // if there's a movie
+                if (doc) {
+                    // add user to likes
+                    doc.moviesTest.push(new Movie({
+                        imdbID: movie.imdbID,
+                        title: movie.Title
+                    }))
+                    // save changes
+                    doc.save(function(err, doc){
+                        if (err) {
+                            deferred.reject(err);
+                        } else {
+                            deferred.resolve(doc);
+                        }
+                    });
+                }
+            });
+
+        //Board.findOneAndUpdate({title: boardTitle}, {$push: {"movies": movie}}, {new: true}, function (err, doc) {
+        //    if (err) {
+        //        deferred.reject(err);
+        //    }
+        //    else {
+        //        deferred.resolve(doc)
+        //    }
+        //});
+        //Board.findOneAndUpdate({title: boardTitle}, {$push: {"moviesTest": {title: movie.Title}}}, {new: true}, function (err, doc) {
+        //    if (err) {
+        //        deferred.reject(err);
+        //    }
+        //    else {
+        //        deferred.resolve(doc)
+        //    }
+        //});
         return deferred.promise;
     }
 

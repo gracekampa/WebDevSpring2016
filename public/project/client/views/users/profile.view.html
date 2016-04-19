@@ -17,10 +17,9 @@
                 </div>
                 <div class="col-sm-4 board" ng-repeat="board in model.boards">
                     <h4 class="board-title">{{board.title}}</h4>
-                    <div class="board-row" ng-repeat="movie in board.movies">
+                    <div class="board-row" ng-repeat="movie in board.moviesTest">
                         <a href="#/details/{{movie.imdbID}}">
                             {{movie.title}}
-                            Test
                         </a>
                     </div>
                 </div>

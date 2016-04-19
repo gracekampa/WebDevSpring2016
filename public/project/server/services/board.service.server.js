@@ -19,6 +19,7 @@ module.exports = function (app, boardModel, movieModel, userModel) {
             .then (
                 function(boards) {
                     res.json(boards);
+                    movieModel.findMoviesByImdbIDs(doc.likes)
                 },
                 function(err) {
                     res.status(400).send(err);

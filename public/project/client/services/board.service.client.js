@@ -41,7 +41,7 @@
 
         function addMovieToBoard(boardTitle, movie, userId) {
             console.log(movie);
-            return $http.post("/api/user/"+userId+"/board/"+boardTitle+"/movie/"+movie.title, movie) ;
+            return $http.post("/api/user/"+userId+"/board/"+boardTitle+"/movie/"+movie.Title, movie) ;
         }
 
         //function findFormById(boardId) {
