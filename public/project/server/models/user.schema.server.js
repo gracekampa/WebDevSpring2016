@@ -7,6 +7,7 @@ module.exports = function() {
 
     var MovieSchema = require("./movie.schema.server.js")(mongoose);
     var BoardSchema = require("./board.schema.server.js")(mongoose);
+    var ReviewSchema = require("./review.schema.server.js")(mongoose);
 
     // use mongoose to declare a user schema
     var UserSchema = mongoose.Schema({
@@ -20,9 +21,7 @@ module.exports = function() {
         likes: [String],
         // movies this user likes
         likesMovies: [MovieSchema],
-        reviewsMovies: [{review: String},
-                        {rating: String},
-                        {movie: [MovieSchema]}],
+        reviewsMovies: [ReviewSchema],
         boards: [BoardSchema]
         // collection property sets
         // collection name to 'user'

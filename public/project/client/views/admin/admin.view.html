@@ -1,0 +1,76 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Admin</h1>
+
+            <h2>Users</h2>
+            <table class="table table-striped admin-table">
+                <thead>
+                <tr>
+                    <th>
+                        <a ng-click="order('username')">Username
+                                <span ng-show="predicate === 'username'" ng-class="{reverse:reverse}">
+                                    <span ng-show="!reverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                    <span ng-show="reverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                </span>
+                        </a>
+                    </th>
+                    <th>Password</th>
+                    <th>
+                        <a ng-click="order('firstName')">First Name
+                                <span ng-show="predicate == 'firstName'" ng-class="{reverse:reverse}">
+                                    <span ng-show="!reverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                    <span ng-show="reverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a ng-click="order('lastName')">Last Name
+                                <span ng-show="predicate === 'lastName'" ng-class="{reverse:reverse}">
+                                    <span ng-show="!reverse" class="glyphicon glyphicon-triangle-top" aria-hidden="true"></span>
+                                    <span ng-show="reverse" class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span>
+                                </span>
+                        </a>
+                    </th>
+                    <th>Roles</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <td><input ng-model="user.username" class="form-control" type="text" name="username" placeholder="username"/></td>
+                    <td><input ng-model="user.password" class="form-control" type="password" name="password" placeholder="password"/></td>
+                    <td><input ng-model="user.firstName" class="form-control" type="text" name="firstName" placeholder="first name"/></td>
+                    <td><input ng-model="user.lastName" class="form-control" type="text" name="lastName" placeholder="last name"/></td>
+                    <td><input ng-model="user.roles" class="form-control" type="text" name="role" placeholder="role1, role2"/></td>
+                    </td>
+                    <td>
+                        <a ng-click="addUser(user)">
+                            <scan class="glyphicon glyphicon-plus"></scan>
+                        </a>
+                        <a ng-click="updateUser(user)">
+                            <scan class="glyphicon glyphicon-ok"></scan>
+                        </a>
+                    </td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in users|orderBy:predicate:reverse">
+                    <td>{{user.username}}</td>
+                    <td> </td>
+                    <td>{{user.firstName}}</td>
+                    <td>{{user.lastName}}</td>
+                    <td>{{user.roles}}</td>
+                    <td>
+                        <a ng-click="removeUser(user)">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
+                        <a ng-click="selectUser(user)">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

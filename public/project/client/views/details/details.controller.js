@@ -50,20 +50,27 @@
                 .findMovieByImdbId(imdbID)
                 .then(function(response){
                     vm.data = response.data;
+                    vm.movie = response.data;
                 });
+
+            //MovieService
+            //    .findUserLikes(imdbID)
+            //    .then(function(response){
+            //        vm.movie = response.data;
+            //        //console.log(vm.movie);
+            //    });
+            console.log(currentUser.likes.indexOf(imdbID));
+            console.log(imdbID);
 
             MovieService
-                .findUserLikes(imdbID)
-                .then(function(response){
-                    vm.movie = response.data;
-                    //console.log(vm.movie);
-                });
-
-            BoardService
-                .findAllBoardsForUser(currentUser._id)
-                .then(function(response){
-                    vm.boardOptions = response.data;
-                });
+                .findAllReviewsForMovie(imdbID)
+                .then(
+                    function(response) {
+                        if (response.data) {
+                            vm.reviews = response.data;
+                            console.log(vm.reviews);
+                        }
+                    });
 
             //MovieService
             //    .findUserReviews(imdbID)
@@ -75,8 +82,8 @@
 
         function favorite(movie) {
             if(currentUser) {
-                vm.movie.likes = [];
-                vm.movie.likes.push(currentUser);
+                movie.likes = [];
+                movie.likes.push(currentUser);
                 MovieService
                     .userLikesMovie(currentUser._id, movie);
                 //console.log(currentUser);
@@ -110,19 +117,18 @@
 
         }
 
-        function addReview(movie, review, rating) {
+        function addReview(imdbID, review, rating) {
             vm.review = review;
             vm.rating = rating;
-            var movie = movie;
             console.log(review);
             console.log(rating);
-            console.log(movie.title);
-            var movieReview = [{review: review}, {rating: rating}, {movie: movie}];
+            console.log(imdbID);
             var user = currentUser;
+            var movieReview = {username: user.username, review: review, rating: rating, imdbID: imdbID};
             //console.log(movieReview);
 
             MovieService
-                .userAddsReview(movieReview, user.username)
+                .userAddsReview(movieReview)
                 .then(init);
 
         }

@@ -13,16 +13,23 @@
         vm.search = search;
 
         function init() {
-
+            //var movieTitle = $routeParams.title;
+            //if(movieTitle) {
+            //    search(movieTitle);
+            //    $location.url("/search/"+movieTitle);
+            //}
         }
         init();
 
         function search(movie) {
             console.log("Inside search");
+            console.log(movie.title);
+            var movieTitle = movie.title;
             OmdbService
                 .findMovieByTitle(movie.title)
                 .then(function(response){
                     vm.data = response.data;
+                    //$location.url("/search/"+movieTitle);
                 });
         }
     }

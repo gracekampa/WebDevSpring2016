@@ -1,6 +1,10 @@
 /**
  * Created by OWNER on 3/22/2016.
+ *
  */
+var mongoose = require("mongoose");
+var ReviewSchema = require("./review.schema.server.js")(mongoose);
+
 module.exports = function() {
 
     var mongoose = require("mongoose");
@@ -15,11 +19,7 @@ module.exports = function() {
         userLikes: [
             {username: String}
         ],
-        userReviews: [
-            {username: String,
-             review: String,
-             rating: String}
-        ]
+        userReviews: [ReviewSchema]
         // store movie documents in this collection
     }, {collection: 'project.omdb.movie'});
 

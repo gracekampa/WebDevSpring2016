@@ -43,7 +43,7 @@ app.use(express.session({secret: '1234567890QWERTY'}));
 
 app.use(express.static(__dirname + '/public'));
 
-require("./public/assignment/server/app.js")(app, db, mongoose);
+//require("./public/assignment/server/app.js")(app, db, mongoose);
 require("./public/project/server/app.js")(app, db, mongoose);
 //require("./public/omdb/server/app.js")(app, db, mongoose);
 

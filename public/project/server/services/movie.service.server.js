@@ -1,10 +1,26 @@
 /**
  * Created by OWNER on 3/22/2016.
  */
-module.exports = function(app, movieModel, userModel) {
+module.exports = function(app, movieModel, userModel, reviewModel) {
     app.post("/api/project/user/:userId/movie/:imdbID", userLikesMovie);
     app.get("/api/project/movie/:imdbID/user", findUserLikes);
     app.post("/api/project/user/:username/movie/:imdbID/review", userAddsReview);
+    app.get("/api/project/movie/:imdbID/review", findAllReviewsForMovie);
+
+    function findAllReviewsForMovie(req, res) {
+        var imdbID = req.params.imdbID;
+
+        reviewModel
+            .findAllReviewsForMovie(imdbID)
+            .then (
+                function(reviews) {
+                    res.json(reviews);
+                },
+                function(err) {
+                    res.status(400).send(err);
+                }
+            );
+    }
 
     function findUserLikes (req, res) {
         var imdbID = req.params.imdbID;
@@ -38,7 +54,7 @@ module.exports = function(app, movieModel, userModel) {
     }
 
     function userLikesMovie(req, res) {
-        var movieOmdb  = req.body;
+        var movie  = req.body;
         var userId = req.params.userId;
         var imdbID = req.params.imdbID;
         var movie;
@@ -47,7 +63,7 @@ module.exports = function(app, movieModel, userModel) {
         //console.log(userId);
 
         movieModel
-            .userLikesMovie(userId, movieOmdb)
+            .userLikesMovie(userId, movie)
             // add user to movie likes
             .then(
                 function (movie) {
@@ -71,19 +87,19 @@ module.exports = function(app, movieModel, userModel) {
     function userAddsReview(req, res) {
         var movieReview  = req.body;
         //console.log(movieReview);
-        var movie = movieReview[2].movie;
-        var username = req.params.username;
-        var imdbID = req.params.imdbID;
+        //var movie = movieReview[2].movie;
+        //var username = req.params.username;
+        //var imdbID = req.params.imdbID;
         //console.log("inside movie service");
         //console.log(movieOmdb);
         //console.log(userId);
 
-        movieModel
-            .userAddsReview(username, movieReview)
+        reviewModel
+            .createReviewForMovie(movieReview)
             // add user to movie likes
             .then(
                 function (movie) {
-                    //return userModel.userAddsReview(username, movie);
+                    //return userModel.userAddsReview(movieReview);
                 },
                 function (err) {
                     res.status(400).send(err);

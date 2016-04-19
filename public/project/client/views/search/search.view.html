@@ -1,10 +1,38 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">Search</h1>
 
+    <!--<input ng-model="model.movie.title" class="form-control"/>-->
+    <!--<button ng-click="model.search(model.movie)" href="#/search/{{model.movie.title}}" class="btn button-movie">-->
+        <!--Search Movie-->
+    <!--</button>-->
+
+    <!--<input ng-model="model.movie.title" class="form-control"/>-->
+    <!--<a ng-click="model.search(model.movie)" href="#/search/{{model.movie.title}}" class="btn button-movie">-->
+        <!--Search Movie-->
+    <!--</a>-->
+
     <input ng-model="model.movie.title" class="form-control"/>
-    <button ng-click="model.search(model.movie)" class="btn button-movie">
+    <a ng-click="model.search(model.movie)" class="btn button-movie">
         Search Movie
-    </button>
+    </a>
+
+    <!--<input ng-model="model.movie.title" class="form-control"/>-->
+    <!--<a ng-click="model.search(model.movie)" href="#/search/{{model.movie.title}}" class="btn button-movie">-->
+        <!--Search Movie-->
+    <!--</a>-->
+
+    <!--<input ng-model="model.movie.title" class="form-control"/>-->
+    <!--<a href="#/search/{{model.movie.title}}" class="btn btn-primary btn-block">-->
+        <!--Search-->
+    <!--</a>-->
+
+    <!--<input ng-model="movieTitle" class="form-control"/>-->
+    <!--&lt;!&ndash;<button ng-click="searchMovie(movieTitle)" class="btn btn-primary btn-block">&ndash;&gt;-->
+    <!--&lt;!&ndash;Search&ndash;&gt;-->
+    <!--&lt;!&ndash;</button>&ndash;&gt;-->
+    <!--<a href="#/search/{{movieTitle}}" class="btn btn-primary btn-block">-->
+        <!--Search-->
+    <!--</a>-->
 
     <div ng-if="model.data" class="table-responsive">
         <table class="table table-striped">

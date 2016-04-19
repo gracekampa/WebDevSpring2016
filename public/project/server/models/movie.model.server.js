@@ -42,11 +42,10 @@ module.exports = function(db) {
 
         //Movie.update({imdbID: movie.imdbID}, { $push: { userReviews: review }});
 
-        Movie.findByIdAndUpdate(movie._id, {$push: { "userReviews": [
+        Movie.findByIdAndUpdate(movie._id, {$push: { "userReviews":
                             {username: review.username,
                              review: review.review,
                              rating: review.rating}
-                                    ]
                     }}, {new: true}, function (err, doc) {
             if (err) {
                 deferred.reject(err);
@@ -153,7 +152,7 @@ module.exports = function(db) {
                         likes: []
                     });
                     // add user to likes
-                    movie.likes.push (userId);
+                    movie.likes.push(userId);
                     // save new instance
                     movie.save(function(err, doc) {
                         if (err) {
@@ -168,7 +167,7 @@ module.exports = function(db) {
         return deferred.promise;
     }
 
-    function findMoviesByImdbIDs (imdbIDs) {
+    function findMoviesByImdbIDs(imdbIDs) {
 
         var deferred = q.defer();
 

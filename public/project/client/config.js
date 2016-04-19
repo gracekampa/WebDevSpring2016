@@ -13,7 +13,7 @@
                 controller: "HomeController",
                 controllerAs: "model",
                 resolve: {
-                    getLoggedIn: getLoggedIn
+                    loggedin: checkCurrentUser
                 }
             })
             .when("/register", {
@@ -26,7 +26,7 @@
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    loggedin: checkLoggedin
                 }
             })
             .when("/profileEdit/:username?", {
@@ -34,20 +34,15 @@
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve: {
-                    checkLoggedIn: checkLoggedIn
+                    loggedin: checkLoggedin
                 }
             })
             .when("/admin", {
-                templateUrl: "views/admin/adminmovies.view.html",
-                controller: "AdminMoviesController"
-            })
-            .when("/adminmovies", {
-                templateUrl: "views/admin/adminmovies.view.html",
-                controller: "AdminMoviesController"
-            })
-            .when("/adminusers", {
-                templateUrl: "views/admin/adminusers.view.html",
-                controller: "AdminUsersController"
+                templateUrl: "views/admin/admin.view.html",
+                controller: "AdminController",
+                resolve: {
+                    loggedin: checkAdmin
+                }
             })
             .when("/login", {
                 templateUrl: "views/users/login.view.html",
@@ -66,45 +61,110 @@
             .when("/details/:imdbID", {
                 templateUrl: "views/details/details.view.html",
                 controller: "DetailsController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    loggedin: checkLoggedin
+                }
             })
             .otherwise({
                 redirectTo: "/home"
             });
     }
 
-    function getLoggedIn(UserService, $q) {
+    //function getLoggedIn(UserService, $q) {
+    //    var deferred = $q.defer();
+    //
+    //    UserService
+    //        .getCurrentUser()
+    //        .then(function(response){
+    //            var currentUser = response.data;
+    //            UserService.setCurrentUser(currentUser);
+    //            deferred.resolve();
+    //        });
+    //
+    //    return deferred.promise;
+    //}
+    //
+    //function checkLoggedIn(UserService, $q, $location) {
+    //
+    //    var deferred = $q.defer();
+    //
+    //    UserService
+    //        .getCurrentUser()
+    //        .then(function(response) {
+    //            var currentUser = response.data;
+    //            if(currentUser) {
+    //                UserService.setCurrentUser(currentUser);
+    //                deferred.resolve();
+    //            } else {
+    //                deferred.reject();
+    //                $location.url("/home");
+    //            }
+    //        });
+    //
+    //    return deferred.promise;
+    //}
+
+    var checkAdmin = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response){
-                var currentUser = response.data;
-                UserService.setCurrentUser(currentUser);
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0' && user.roles.indexOf('admin') != -1)
+            {
+                $rootScope.currentUser = user;
                 deferred.resolve();
-            });
+            }
+        });
 
         return deferred.promise;
-    }
+    };
 
-    function checkLoggedIn(UserService, $q, $location) {
 
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope)
+    {
         var deferred = $q.defer();
 
-        UserService
-            .getCurrentUser()
-            .then(function(response) {
-                var currentUser = response.data;
-                if(currentUser) {
-                    UserService.setCurrentUser(currentUser);
-                    deferred.resolve();
-                } else {
-                    deferred.reject();
-                    $location.url("/home");
-                }
-            });
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
+                deferred.resolve();
+            }
+            // User is Not Authenticated
+            else
+            {
+                $rootScope.errorMessage = 'You need to log in.';
+                deferred.reject();
+                $location.url('/login');
+            }
+        });
 
         return deferred.promise;
-    }
+    };
+
+    var checkCurrentUser = function($q, $timeout, $http, $location, $rootScope)
+    {
+        var deferred = $q.defer();
+
+        $http.get('/api/project/loggedin').success(function(user)
+        {
+            $rootScope.errorMessage = null;
+            // User is Authenticated
+            if (user !== '0')
+            {
+                $rootScope.currentUser = user;
+            }
+            deferred.resolve();
+        });
+
+        return deferred.promise;
+    };
 
 })();

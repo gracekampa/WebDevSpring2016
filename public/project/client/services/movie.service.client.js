@@ -12,7 +12,8 @@
             findUserLikes: findUserLikes,
             userAddsToBoard: userAddsToBoard,
             findAllBoardsForUser: findAllBoardsForUser,
-            userAddsReview: userAddsReview
+            userAddsReview: userAddsReview,
+            findAllReviewsForMovie: findAllReviewsForMovie
 
         };
         return api;
@@ -34,9 +35,14 @@
             return $http.get("/api/project/user/" + userId + "/board");
         }
 
-        function userAddsReview(movieReview, username) {
+        function findAllReviewsForMovie(imdbID) {
+            //console.log(imdbID);
+            return $http.get("/api/project/movie/" + imdbID + "/review");
+        }
+
+        function userAddsReview(movieReview) {
             //console.log(movieReview[2]);
-            return $http.post("/api/project/user/"+username+"/movie/"+movieReview[2].movie.imdbID+"/review", movieReview);
+            return $http.post("/api/project/user/"+movieReview.username+"/movie/"+movieReview.imdbID+"/review", movieReview);
         }
     }
 })();

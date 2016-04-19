@@ -253,6 +253,12 @@ ul.rating {
     color: #FF1C19;
 }
 
+.review {
+    width: 600px;
+    font-size: 20px;
+    font-style: italic;
+}
+
 /*
  * Forms and Fields
  */
