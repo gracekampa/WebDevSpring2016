@@ -62,6 +62,12 @@
             console.log(currentUser.likes.indexOf(imdbID));
             console.log(imdbID);
 
+            BoardService
+                .findAllBoardsForUser(currentUser._id)
+                .then(function(response){
+                    vm.boardOptions = response.data;
+                });
+
             MovieService
                 .findAllReviewsForMovie(imdbID)
                 .then(
