@@ -84,18 +84,18 @@ module.exports = function (db, mongoose) {
         return deferred.promise;
     }
 
-    function addMovieToBoard(boardTitle, movie, userId) {
-        var deferred = q.defer();
-        //var boardId = Board.find({title: boardTitle}, {userId: userId});
-
-        Board.findOneAndUpdate({title: boardTitle}, {$push: {"movies": movie}}, {new: true}, function (err, doc) {
-            if (err) {
-                deferred.reject(err);
-            }
-            else {
-                deferred.resolve(doc)
-            }
-        });
-        return deferred.promise;
-    }
+    //function addMovieToBoard(boardTitle, movie, userId) {
+    //    var deferred = q.defer();
+    //    //var boardId = Board.find({title: boardTitle}, {userId: userId});
+    //
+    //    Board.findOneAndUpdate({title: boardTitle}, {$push: {"movies": movie}}, {new: true}, function (err, doc) {
+    //        if (err) {
+    //            deferred.reject(err);
+    //        }
+    //        else {
+    //            deferred.resolve(doc)
+    //        }
+    //    });
+    //    return deferred.promise;
+    //}
 };

@@ -19,6 +19,7 @@
         var vm = this;
         var imdbID = $routeParams.imdbID;
         var currentUser = $rootScope.currentUser;
+        vm.like = false;
         $scope.rating = 1;
         vm.rating = 1;
         vm.review = "";
@@ -50,7 +51,7 @@
                 .findMovieByImdbId(imdbID)
                 .then(function(response){
                     vm.data = response.data;
-                    vm.movie = response.data;
+                    //vm.movie = response.data;
                 });
 
             //MovieService
@@ -59,6 +60,9 @@
             //        vm.movie = response.data;
             //        //console.log(vm.movie);
             //    });
+            if (currentUser.likes.indexOf(imdbID) > -1) {
+                vm.like = true;
+            }
             console.log(currentUser.likes.indexOf(imdbID));
             console.log(imdbID);
 
@@ -92,6 +96,7 @@
                 movie.likes.push(currentUser);
                 MovieService
                     .userLikesMovie(currentUser._id, movie);
+                vm.like = true;
                 //console.log(currentUser);
             } else {
                 $location.url("/login");

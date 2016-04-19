@@ -43,7 +43,7 @@
                     function(response) {
                         if (response.data) {
                             vm.boards = response.data;
-                            console.log(vm.boards);
+                            //console.log(vm.boards[0].movies);
                         }
                     });
 
@@ -84,7 +84,7 @@
                 .createBoardForUser(board, user)
                 .then (
                     function(response) {
-                        vm.forms = response.data;
+                        vm.boards = response.data;
                     },
                     function(err) {
                         vm.error = err;

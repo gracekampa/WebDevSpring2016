@@ -238,8 +238,8 @@ module.exports = function(app, movieModel, userModel) {
 
     function register(req, res) {
         var newUser = req.body;
-        newUser.roles = ['user', 'admin'];
-        //newUser.roles = ['user'];
+        //newUser.roles = ['user', 'admin'];
+        newUser.roles = ['user'];
 
         userModel
             .findUserByUsername(newUser.username)

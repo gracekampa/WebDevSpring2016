@@ -30,7 +30,7 @@
         //}
 
         function findAllBoardsForUser(userId) {
-            console.log("inside board client"+userId);
+            //console.log("inside board client"+userId);
             return $http.get("/api/project/user/" + userId + "/board");
         }
 
@@ -40,6 +40,7 @@
         }
 
         function addMovieToBoard(boardTitle, movie, userId) {
+            console.log(movie);
             return $http.post("/api/user/"+userId+"/board/"+boardTitle+"/movie/"+movie.title, movie) ;
         }
 

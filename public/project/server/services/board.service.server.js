@@ -93,6 +93,7 @@ module.exports = function (app, boardModel, movieModel, userModel) {
         var userId = req.params.userId;
         var boardTitle = req.params.boardTitle;
         var movieId = req.params.movieId;
+        console.log(movie.Title);
 
         boardModel.addMovieToBoard(boardTitle, movie, userId)
             .then(
