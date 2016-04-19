@@ -192,7 +192,7 @@ button > a, a:hover {
 }
 
 .board-row {
-    height: 35px;
+    /*height: 35px;*/
     border-bottom: solid lightgray 1px;
     padding-top: 6px;
 }
@@ -208,6 +208,10 @@ button > a, a:hover {
 
 .like-button {
     font-size: 30px;
+}
+
+.filled {
+    color: #FF1C19;
 }
 
 .newBoard {
